@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameBuilding: House
   prefabs: {fileID: 8387035741673672931, guid: 4208451db178833458fe6115efb87bbb, type: 3}
+  timeBuild: 3
+  money: 3
