@@ -27,10 +27,10 @@ namespace Scripts{
 
         public void Excute()
         {
-            if(Input.GetKey(KeyCode.Z))
+            if (Input.GetKey(KeyCode.Z))
             {
                 player.DayNightCycle.TransitionTo(player.DayNightCycle.nightState);
-                Debug.Log("halo");
+                
             }
         }
 
@@ -57,7 +57,11 @@ namespace Scripts{
 
         public void Excute()
         {
-            //
+            if (Input.GetKey(KeyCode.X))
+            {
+                player.DayNightCycle.TransitionTo(player.DayNightCycle.dayState);
+
+            }
         }
 
         public void Exit()

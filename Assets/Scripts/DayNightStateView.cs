@@ -13,7 +13,6 @@ namespace Scripts{
         private float timeSpeed = 0.2f;
         private DayNightCycle dayNightCycle;
         private DayNightController playerMovement;
-        private float time2;
         private void Awake()
         {
             playerMovement = GetComponent<DayNightController>();
@@ -27,28 +26,50 @@ namespace Scripts{
             {
                 Debug.Log("halo");
             }
-            time2 = Time.time;
         }
         
         private void OnStateChanged(IDayNight obj)
         {
             if(obj == dayNightCycle.nightState)
             {
-                //time += Time.deltaTime * timeSpeed;
-                //Debug.Log(time % 1);
-                //light2d.color = gradient.Evaluate(time % 1);\
-                StartCoroutine(UpdateTime());
-
+                StartCoroutine(ExcuteNightView());
+            }
+            else if (obj == dayNightCycle.dayState)
+            {
+                StartCoroutine(ExecuteDayView());
             }
         }
 
-        private IEnumerator UpdateTime()
+        private IEnumerator ExcuteNightView()
         {
-            while (dayNightCycle.currentTimeState == dayNightCycle.nightState)
+            while (dayNightCycle.currentTimeState == dayNightCycle.nightState && time < 1f)
             {
                 time += Time.deltaTime * timeSpeed;
-                Debug.Log(time % 1);
-                light2d.color = gradient.Evaluate(time % 1);
+                
+                light2d.color = gradient.Evaluate(time / 1f);
+                if(time >= 0.99f)
+                {
+                    time = 1f;
+                }
+                Debug.Log(time);
+                yield return null;
+            }
+        }
+
+        private IEnumerator ExecuteDayView()
+        {
+            while (dayNightCycle.currentTimeState == dayNightCycle.dayState && time > 0f)
+            {
+                time -= Time.deltaTime * timeSpeed; // Giảm dần thời gian
+
+                light2d.color = gradient.Evaluate(time / 1f);
+
+                if (time <= 0.01f)
+                {
+                    time = 0f;
+                }
+
+                Debug.Log(time);
                 yield return null;
             }
         }
@@ -66,17 +87,3 @@ namespace Scripts{
     }
     
 }
-//[SerializeField] private Gradient gradient;
-//private Light2D light2d;
-//private float time;
-//private float timeSpeed = 0.2f;
-//private void Awake()
-//{
-//    light2d = GetComponent<Light2D>();
-//}
-
-//private void Update()
-//{
-//    time += Time.deltaTime * timeSpeed;
-//    light2d.color = gradient.Evaluate(time % 1);
-//}
