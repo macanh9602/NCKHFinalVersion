@@ -6,9 +6,26 @@ namespace Scripts{
     
     public class HealthSysterm : MonoBehaviour
     {
-        public void OnDamage()
-        {
+        [SerializeField] float healthMax;
+        [SerializeField] float currentHealth;
 
+        private void Start()
+        {
+            currentHealth = healthMax;
+        }
+        public void OnDamage(float damage)
+        {
+            currentHealth -= damage;
+        }
+
+        public float GetHealth()
+        {
+            return currentHealth;
+        }
+
+        public float HealthRatio()
+        {
+            return currentHealth/healthMax;
         }
     }
     
