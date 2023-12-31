@@ -10,6 +10,7 @@ namespace Scripts.Manager{
 
         [SerializeField] private ResourceTypeSO resource;
         public Dictionary<ResourceTypeSO, int> _coin = new Dictionary<ResourceTypeSO, int>();
+        //action
         private void Awake()
         {
             Instance = this;

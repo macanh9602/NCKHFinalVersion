@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Scripts{
     
-    public class TransitionDay : MonoBehaviour
+    public class Enemy : MonoBehaviour
     {
         // Start is called before the first frame update
         void Start()

@@ -9,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6085878480613472716}
-  - component: {fileID: 2896141111391617986}
   - component: {fileID: 7402184437997946141}
   - component: {fileID: 1805401411705695160}
+  - component: {fileID: 2896141111391617986}
+  - component: {fileID: 4360328666722445028}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -36,19 +37,6 @@ Transform:
   - {fileID: 801700410400791342}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2896141111391617986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 17342415330512336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37dec02914151ca4d85f2184942921e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3
 --- !u!70 &7402184437997946141
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -111,6 +99,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2896141111391617986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17342415330512336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37dec02914151ca4d85f2184942921e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+--- !u!114 &4360328666722445028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17342415330512336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03a1b60a12a75eb478d5479361069745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthMax: 1000
 --- !u!1 &1753212791736313255
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,6 +261,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6837928053865365609, guid: c23841cd3ecf0dc40a2255c345c26ade, type: 3}
+      propertyPath: healthSysterm
+      value: 
+      objectReference: {fileID: 4360328666722445028}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

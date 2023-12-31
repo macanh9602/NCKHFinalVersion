@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +8,8 @@ namespace Scripts{
     public class HealthSysterm : MonoBehaviour
     {
         [SerializeField] float healthMax;
-        [SerializeField] float currentHealth;
+        private float currentHealth;
+        public  event EventHandler OnHealthChange;
 
         private void Start()
         {
@@ -16,6 +18,9 @@ namespace Scripts{
         public void OnDamage(float damage)
         {
             currentHealth -= damage;
+            Debug.Log(currentHealth);
+            currentHealth = Mathf.Clamp(currentHealth,0,healthMax);
+            OnHealthChange?.Invoke(this , EventArgs.Empty);
         }
 
         public float GetHealth()

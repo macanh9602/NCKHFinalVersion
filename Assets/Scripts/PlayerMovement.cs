@@ -9,6 +9,7 @@ namespace Scripts{
         [SerializeField] float speed = 10f;
         //private DayNightCycle dayNightCycle; 
         //public DayNightCycle DayNightCycle => dayNightCycle;
+        private HealthSysterm health;
         private void Awake()
         {
             //dayNightCycle = new DayNightCycle(this);
@@ -17,6 +18,7 @@ namespace Scripts{
         void Start()
         {
             //dayNightCycle.initialize(dayNightCycle.dayState); //
+            health = GetComponent<HealthSysterm>();
         }
     
         // Update is called once per frame
@@ -24,6 +26,10 @@ namespace Scripts{
         {
             Move();
             //dayNightCycle.update(); //
+            if (health != null && Input.GetKeyDown(KeyCode.Q))
+            {
+                health.OnDamage(30f);
+            }
         }
 
         private void Move()
