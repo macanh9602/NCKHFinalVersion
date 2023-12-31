@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Scripts{
+namespace Scripts.Extension{
     
     public static class Extension
     {      
@@ -11,9 +11,9 @@ namespace Scripts{
             return Camera.main.ScreenToWorldPoint(Input.mousePosition);
        }
 
-        public static Vector2 getRandomPos()
+        public static Vector3 getRandomPos()
         {
-            return new Vector2(Random.Range(-2, 2) , Random.Range(-2,2));
+            return new Vector3(Random.Range(-1, 1) , Random.Range(-1,1));
         }
     }
     

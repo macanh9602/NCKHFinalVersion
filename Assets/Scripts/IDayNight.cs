@@ -12,9 +12,10 @@ namespace Scripts{
         public void Exit();
     }
 
-    public class Day : IDayNight
+    public class Day :  IDayNight
     {
         private DayNightController player;
+        private float requiredPressTime= 5f;
         public Day(DayNightController player)
         {
             this.player = player;
@@ -27,10 +28,41 @@ namespace Scripts{
 
         public void Excute()
         {
-            if (Input.GetKey(KeyCode.Z))
+            if (Input.GetKey(KeyCode.Space))
             {
+                //StartCoroutine(WaitForSpacePress());
+                float elapsedTime = 0f;
+
+                while (elapsedTime < requiredPressTime)
+                {
+                    elapsedTime += Time.deltaTime;
+                    //yield return null;
+                }
+                Debug.Log(elapsedTime);
+                if (elapsedTime >= requiredPressTime)
+                {
+                    //Debug.Log(elapsedTime);
+                    // Chạy logic khi người dùng giữ phím Space trong 5 giây
+                    player.DayNightCycle.TransitionTo(player.DayNightCycle.nightState);
+                }
+
+            }
+        }
+
+        private IEnumerator WaitForSpacePress()
+        {
+            float elapsedTime = 0f;
+
+            while ( elapsedTime < requiredPressTime)
+            {
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            if (elapsedTime >= requiredPressTime)
+            {
+                // Chạy logic khi người dùng giữ phím Space trong 5 giây
                 player.DayNightCycle.TransitionTo(player.DayNightCycle.nightState);
-                
             }
         }
 

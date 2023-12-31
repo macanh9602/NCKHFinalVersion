@@ -20,6 +20,10 @@ namespace Scripts{
             currentHealth -= damage;
             Debug.Log(currentHealth);
             currentHealth = Mathf.Clamp(currentHealth,0,healthMax);
+            if(currentHealth <= 0)
+            {
+                Destroy(gameObject);
+            }
             OnHealthChange?.Invoke(this , EventArgs.Empty);
         }
 

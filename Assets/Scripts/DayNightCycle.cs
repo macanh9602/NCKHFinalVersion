@@ -33,6 +33,7 @@ namespace Scripts{
 
         public void TransitionTo(IDayNight nextTimeState)
         {
+            currentTimeState.Exit();
             currentTimeState = nextTimeState;
             currentTimeState.Enter();
             stateChanged?.Invoke(nextTimeState);

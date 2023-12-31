@@ -51,7 +51,6 @@ namespace Scripts{
                 {
                     time = 1f;
                 }
-                Debug.Log(time);
                 yield return null;
             }
         }

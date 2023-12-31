@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,17 +7,68 @@ namespace Scripts{
     
     public class Enemy : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        public static Enemy OnCreate(EnemyTypeSO enemy , Vector3 pos)
         {
-            
+            //xac dinh enemy pref
+            Transform pfEnemy = Resources.Load<Transform>("Enemy");
+            //instantiate no 
+            pfEnemy = Instantiate(pfEnemy,pos ,Quaternion.identity);
+            // getComponent Enemy 
+            Enemy thisEnemy = pfEnemy.GetComponent<Enemy>();
+            // return   
+            return thisEnemy;
         }
-    
-        // Update is called once per frame
-        void Update()
+
+        private Transform target;
+        private Rigidbody2D rb;
+        private void Start()
         {
-            
+            rb = GetComponent<Rigidbody2D>();
         }
+
+        private void CheckTarget()
+        {
+            Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, 30f, LayerMask.GetMask("Building"));
+            if (collider.Length > 0)
+            {
+                target = collider[0].gameObject.transform;
+            }
+            else
+            {
+                //giu nguyen vi tri  neu ko co muc tieu trong tam
+                target = transform;
+            }
+            Debug.Log(target.gameObject.name);
+        }
+
+        private void Update()
+        {
+            if (target != null)
+            {
+                Vector3 vectorNormalize = (target.position - transform.position).normalized;
+                float speed = UnityEngine.Random.Range(2f, 3f);
+                rb.velocity = vectorNormalize * speed;
+            }
+            else
+            {
+                CheckTarget();
+
+            }
+            // Debug.Log(BuildingManager.Instance.getCastleCenter());     
+        }
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.gameObject.layer == 6)
+            {
+                HealthSysterm health = collision.gameObject.GetComponent<HealthSysterm>();
+                health.OnDamage(20f);
+                //health.IsHealthChange();        
+
+                Destroy(gameObject);
+                // isdestroy = true;
+            }
+        }
+
     }
-    
+
 }

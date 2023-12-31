@@ -9,8 +9,18 @@ namespace Scripts{
     public class ResourceUI : MonoBehaviour
     {
         private void Start()
-        {         
-            Debug.Log(Manager.ResourceManager.Instance.getResourceAmount());
+        {
+            UpdateCoinUI();
+
+            Manager.ResourceManager.Instance.OnCoinChange += Instance_OnCoinChange;
+        }
+
+        private void Instance_OnCoinChange(object sender, System.EventArgs e)
+        {
+            UpdateCoinUI();
+        }
+        public void UpdateCoinUI()
+        {
             string text = Manager.ResourceManager.Instance.getResourceAmount().ToString();
             transform.Find("Coin_text_UI").GetComponent<TextMeshProUGUI>().text = text;
         }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Resources;
 using UnityEngine;
 
 namespace Scripts{
@@ -19,6 +20,7 @@ namespace Scripts{
                     Debug.Log("halo");
                     gameObject.SetActive(false);
                     BuildingConstruction building = BuildingConstruction.Create(buildingType, this.transform.position);
+                    Manager.ResourceManager.Instance.CalculateCost((int)buildingType.money);
                     IsBuild = true;
                     //Debug.Log(this.transform.position);
                 }

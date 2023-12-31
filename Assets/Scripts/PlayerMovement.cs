@@ -10,6 +10,8 @@ namespace Scripts{
         //private DayNightCycle dayNightCycle; 
         //public DayNightCycle DayNightCycle => dayNightCycle;
         private HealthSysterm health;
+
+
         private void Awake()
         {
             //dayNightCycle = new DayNightCycle(this);
@@ -26,10 +28,14 @@ namespace Scripts{
         {
             Move();
             //dayNightCycle.update(); //
-            if (health != null && Input.GetKeyDown(KeyCode.Q))
-            {
-                health.OnDamage(30f);
-            }
+
+            //if (health != null && Input.GetKeyDown(KeyCode.Q))
+            //{
+            //    health.OnDamage(30f);
+            //}
+
+
+
         }
 
         private void Move()
