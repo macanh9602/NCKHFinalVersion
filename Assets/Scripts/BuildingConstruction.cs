@@ -9,15 +9,16 @@ namespace Scripts{
     {
         //1 lop static tao hieu ung co tham so truyen vao la buidlingtype va vi tri (tu gameobject chua component
         //posbuildingcontroller)
-        public static BuildingConstruction Create(BuildingTypeSO buildingType, Vector3 pos)
+        public static BuildingConstruction Create(BuildingTypeSO buildingType, Vector3 pos , PosBuildingController posBuilding)
         {
             Transform pfbuildingConstruction = Resources.Load<Transform>("BuildingConstruction");
             //Debug.Log(pos);
             pfbuildingConstruction = Instantiate(pfbuildingConstruction , pos , Quaternion.identity);
+            pfbuildingConstruction.transform.parent = posBuilding.transform;
             BuildingConstruction buildingConstruction = pfbuildingConstruction.gameObject.GetComponent<BuildingConstruction>();
-            buildingConstruction.setup(buildingType, pos);
+            buildingConstruction.setup(buildingType, pos , posBuilding);
             //Debug.Log(buildingConstruction.transform.position);
-            Debug.Log(buildingType.name);
+            //Debug.Log(buildingType.name);
             return buildingConstruction;
         }
 
@@ -25,10 +26,12 @@ namespace Scripts{
         BuildingTypeSO buildingType;
         Vector3 pos;
         float time;
-        public void setup(BuildingTypeSO buildingType , Vector3 pos)
+        PosBuildingController posBuilding;
+        public void setup(BuildingTypeSO buildingType , Vector3 pos , PosBuildingController posBuilding)
         {
             this.buildingType = buildingType;
             this.pos = pos;
+            this.posBuilding = posBuilding;
         }
 
         private void Start()
@@ -43,7 +46,7 @@ namespace Scripts{
             if (time <= 0)
             {
                 //transform.Find("clip1").GetComponent<Animator>().enabled = false;
-                BuildingManager.Instance.Build(buildingType, this.transform.position);
+                BuildingManager.Instance.Build(buildingType, this.transform.position , posBuilding);
                 Destroy(gameObject);
             }
             //Debug.Log(NormalizeTimeBuild());

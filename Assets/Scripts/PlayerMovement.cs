@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using Scripts.DayNightStateMachine;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,19 +9,19 @@ namespace Scripts{
     public class PlayerMovement : MonoBehaviour
     {
         [SerializeField] float speed = 10f;
-        //private DayNightCycle dayNightCycle; 
-        //public DayNightCycle DayNightCycle => dayNightCycle;
         private HealthSysterm health;
-
-
+        DayNightController dayNightController;
+        public PosBuildingController currentPosBuilding;
+        public Action<PosBuildingController> OnChangeCurrentPosBuilding;
+        public float costBuilding;
         private void Awake()
         {
-            //dayNightCycle = new DayNightCycle(this);
+            dayNightController = GetComponent<DayNightController>();
+            dayNightController.TranstitionToState(new DayState(this));
         }
         // Start is called before the first frame update
         void Start()
         {
-            //dayNightCycle.initialize(dayNightCycle.dayState); //
             health = GetComponent<HealthSysterm>();
         }
     
@@ -27,8 +29,8 @@ namespace Scripts{
         void Update()
         {
             Move();
-            //dayNightCycle.update(); //
-
+            dayNightController.Excuted();
+            //Debug.Log((dayNightController.currentState));
             //if (health != null && Input.GetKeyDown(KeyCode.Q))
             //{
             //    health.OnDamage(30f);
@@ -45,7 +47,26 @@ namespace Scripts{
             transform.position += new Vector3(xInput , yInput , 0 ).normalized * speed * Time.deltaTime;
         }
 
-       
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if(collision.gameObject.layer == 7)
+            {
+                costBuilding = collision.GetComponent<PosBuildingController>().buildingType.money;
+                currentPosBuilding = collision.GetComponent<PosBuildingController>();
+                OnChangeCurrentPosBuilding?.Invoke(currentPosBuilding);
+            }
+            
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.gameObject.layer == 7)
+            {
+                currentPosBuilding = null;
+                OnChangeCurrentPosBuilding?.Invoke(currentPosBuilding);
+            }    
+        }
+
     }
     
 }

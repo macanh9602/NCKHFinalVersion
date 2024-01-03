@@ -12,10 +12,11 @@ namespace Scripts.Manager{
         {
             Instance = this;
         }
-        public void Build(BuildingTypeSO buildingType , Vector3 pos)
+        public void Build(BuildingTypeSO buildingType , Vector3 pos , PosBuildingController posBuilding)
         {
-            Debug.Log("halo");
+            //Debug.Log("halo");
             Transform building = Instantiate(buildingType.prefabs, pos, Quaternion.identity);
+            building.transform.parent = posBuilding.transform;
             //building.SetParent(currentBuildingTypeHolder.gameObject.transform);
            // building.GetComponent<SpriteRenderer>().sprite = buildingType.sprite[Random.Range(0, buildingType.sprite.Length)];
             //building.GetComponent<CoinGenerator>().buildingType = buildingType;
