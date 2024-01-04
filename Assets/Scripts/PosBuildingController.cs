@@ -10,6 +10,12 @@ namespace Scripts{
     public class PosBuildingController : MonoBehaviour
     {
         public BuildingTypeSO buildingType;
+        public bool IsBuild = false;
+
+        public void setIsBuild()
+        {
+            IsBuild = true;
+        }
         //[SerializeField] bool IsBuild = false;
 
         //private void OnTriggerStay2D(Collider2D collision)

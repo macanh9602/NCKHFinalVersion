@@ -9,7 +9,6 @@ namespace Scripts.DayNightStateMachine {
     {
         public IDayNight currentState;
         public event Action<IDayNight> OnDayNightStateChange;
-        
         public void TranstitionToState(IDayNight nextState)
         {
             currentState?.Exit(this);

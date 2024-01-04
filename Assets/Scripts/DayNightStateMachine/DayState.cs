@@ -28,16 +28,18 @@ namespace Scripts.DayNightStateMachine
             OnChangeCurrentPosBuilding(player.currentPosBuilding);
             timeChangeState = 5f;
             player.OnChangeCurrentPosBuilding += OnChangeCurrentPosBuilding;
+            
         }
         public void Excuted(DayNightController dayNightController)
         {
             //logic thuc thi
             if (Input.GetKey(KeyCode.Space))
             {
+                bool IsTouchPosBuilding = currentPosBuilding != null;
                 timer += Time.deltaTime;
                 Debug.Log(timer);           
-                LoadTimeUI.instance.UpdateTimer(timer, TimerRatio());
-                if (currentPosBuilding != null)
+                LoadTimeUI.instance.UpdateTimer(timer, TimerRatio() , IsTouchPosBuilding);
+                if (IsTouchPosBuilding)
                 {
                     if (player.costBuilding > 0 && (int)timer > coinCurrentPay)
                     {
@@ -55,17 +57,22 @@ namespace Scripts.DayNightStateMachine
                         //currentPosBuilding.Build();
                         Debug.Log("halo");
                         BuildingConstruction building = BuildingConstruction.Create(currentPosBuilding.buildingType, currentPosBuilding.transform.position , currentPosBuilding);
+                        currentPosBuilding.setIsBuild();
                         coinCurrentPay = 0f;
                         timer = 0f;
                         
                     }
                 }
                 else if (timer >= timeChangeState)
+                {
+                    LoadTimeUI.instance.setUILoad(false);
                     dayNightController.TranstitionToState(new NightState(player));
-
+                }
+                    
             }
             else if (Input.GetKeyUp(KeyCode.Space))
             {
+                LoadTimeUI.instance.setUILoad(false);
                 timer = 0f;
                 if (coinCurrentPay > 0)
                     player.costBuilding += coinCurrentPay; //return

@@ -13,23 +13,11 @@ namespace Scripts.DayNightStateMachine{
         private float timeSpeed = 0.2f;
         public PlayerMovement player;
         private DayNightController dayNightController;
-        //    //private Player dayNightCycle;
-        //    public Transform player; 
 
         private void Start()
         {
-            //playerMovement = GetComponent<DayNightController>();
             light2d = GetComponent<Light2D>();
-            //dayNightCycle = playerMovement.DayNightCycle;
-            //if (dayNightCycle != null)
-            //{
-            //dayNightCycle.stateChanged += OnStateChanged; //
-            //}
-            //player.GetComponent<DayNightController>().OnDayNightStateChange += DayNightStateView_OnDayNightStateChange;
-            //else
-            //{
-            //    Debug.Log("halo");
-            //}
+
             dayNightController = player.GetComponent<DayNightController>();
             player.GetComponent<DayNightController>().OnDayNightStateChange += DayNightStateView_OnDayNightStateChange;
         }
@@ -45,19 +33,6 @@ namespace Scripts.DayNightStateMachine{
                 StartCoroutine(ExcuteNightView());
             }
         }
-
-
-        //    private void OnStateChanged(IDayNight obj)
-        //    {
-        //        if (obj == dayNightController.currentState = DayState)
-        //        {
-        //            StartCoroutine(ExcuteNightView());
-        //        }
-        //        else if (obj == dayNightCycle.dayState)
-        //        {
-        //            StartCoroutine(ExecuteDayView());
-        //        }
-        //    }
 
         private IEnumerator ExcuteNightView()
         {
@@ -91,17 +66,6 @@ namespace Scripts.DayNightStateMachine{
                 yield return null;
             }
         }
-        //    // Start is called before the first frame update
-        //    void Start()
-        //    {
-
-        //    }
-
-        //    // Update is called once per frame
-        //    void Update()
-        //    {
-
-        //    }
     }
     
 }

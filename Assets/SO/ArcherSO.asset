@@ -10,10 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af9bcf5bd76e9e147abf183df3905625, type: 3}
-  m_Name: HouseSO
+  m_Name: ArcherSO
   m_EditorClassIdentifier: 
-  nameBuilding: House
-  prefabs: {fileID: 8387035741673672931, guid: 4208451db178833458fe6115efb87bbb, type: 3}
-  timeBuild: 3
-  money: 3
-  sprite: {fileID: -213113268, guid: 61e45fbc2075d964982416b09d1f903a, type: 3}
+  nameBuilding: Archer
+  prefabs: {fileID: 5600500097335745406, guid: 69c65cad03d0b52488b5ad1c398ec5a1, type: 3}
+  timeBuild: 4
+  money: 4
+  sprite: {fileID: 21300000, guid: 25f025660d1ae3f408ce6e91a36b4a3e, type: 3}
+  CanDamaging:
+    damage: 20
+    amor: 0
+    typeOfWeapon: arrow

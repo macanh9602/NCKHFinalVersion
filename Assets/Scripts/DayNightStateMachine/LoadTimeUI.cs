@@ -19,12 +19,16 @@ namespace Scripts{
             this.gameObject.SetActive(false);
         }
 
-        public void UpdateTimer(float timerValue , float timeNormalize)
+        public void UpdateTimer(float timerValue , float timeNormalize , bool IsTouchPosBuilding)
         {
             this.gameObject.SetActive(true);
             if (timerText != null && img != null)
             {
-                timerText.text = timerValue.ToString("F1");
+                if (IsTouchPosBuilding)
+                {
+                    timerText.text = "CurrentPayCoin : " + timerValue.ToString("F0");
+                }
+                else timerText.text = "Night in " + timerValue.ToString("F1");
                 img.fillAmount = timeNormalize;
                 if (timeNormalize > 1)
                 {
@@ -32,6 +36,11 @@ namespace Scripts{
                 }
             }
             
+        }
+
+        public void setUILoad(bool IsOke)
+        {
+            this.gameObject.SetActive(IsOke);
         }
         
     }

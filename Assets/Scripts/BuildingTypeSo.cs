@@ -12,9 +12,18 @@ namespace Scripts
         public Transform prefabs;
         public float timeBuild;
         public float money;
+        public Sprite sprite;
+        public Damaging CanDamaging;
 
     }
 
+    [System.Serializable]
+    public class Damaging
+    {
+        public float damage;
+        public float amor;
+        public string typeOfWeapon;
+    }
 
 
 }
