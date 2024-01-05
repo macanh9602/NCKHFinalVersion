@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Scripts{
+namespace Scripts.Controller{
     
     public class GhostController : MonoBehaviour
     {

@@ -10,7 +10,7 @@ namespace Scripts{
         [SerializeField] float healthMax;
         private float currentHealth;
         public  event EventHandler OnHealthChange;
-
+        public float CurrentHealth => currentHealth;
         private void Start()
         {
             currentHealth = healthMax;
@@ -25,11 +25,6 @@ namespace Scripts{
                 Destroy(gameObject);
             }
             OnHealthChange?.Invoke(this , EventArgs.Empty);
-        }
-
-        public float GetHealth()
-        {
-            return currentHealth;
         }
 
         public float HealthRatio()

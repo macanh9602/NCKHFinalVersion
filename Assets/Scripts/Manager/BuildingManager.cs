@@ -12,7 +12,7 @@ namespace Scripts.Manager{
         {
             Instance = this;
         }
-        public void Build(BuildingTypeSO buildingType , Vector3 pos , PosBuildingController posBuilding)
+        public void Build(BuildingTypeSO buildingType , Vector3 pos , Controller.PosBuildingController posBuilding)
         {
             //Debug.Log("halo");
             Transform building = Instantiate(buildingType.prefabs, pos, Quaternion.identity);

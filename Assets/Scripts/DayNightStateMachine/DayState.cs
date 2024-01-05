@@ -14,8 +14,7 @@ namespace Scripts.DayNightStateMachine
         private float timer; //1f 1 coin
         private float coinToBuild;
         private float timeChangeState;
-        private PosBuildingController currentPosBuilding;
-        private bool isBuild = false;
+        private Controller.PosBuildingController currentPosBuilding;
         public float Timer => timer;
 
         public DayState(PlayerMovement player)
@@ -84,7 +83,7 @@ namespace Scripts.DayNightStateMachine
             player.OnChangeCurrentPosBuilding -= OnChangeCurrentPosBuilding;
         }
 
-        public void OnChangeCurrentPosBuilding(PosBuildingController currentPosBuilding)
+        public void OnChangeCurrentPosBuilding(Controller.PosBuildingController currentPosBuilding)
         {
             timer = 0f;
             coinCurrentPay = 0f;

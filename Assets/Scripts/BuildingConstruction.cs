@@ -9,7 +9,7 @@ namespace Scripts{
     {
         //1 lop static tao hieu ung co tham so truyen vao la buidlingtype va vi tri (tu gameobject chua component
         //posbuildingcontroller)
-        public static BuildingConstruction Create(BuildingTypeSO buildingType, Vector3 pos , PosBuildingController posBuilding)
+        public static BuildingConstruction Create(BuildingTypeSO buildingType, Vector3 pos , Controller.PosBuildingController posBuilding)
         {
             Transform pfbuildingConstruction = Resources.Load<Transform>("BuildingConstruction");
             //Debug.Log(pos);
@@ -26,8 +26,8 @@ namespace Scripts{
         BuildingTypeSO buildingType;
         Vector3 pos;
         float time;
-        PosBuildingController posBuilding;
-        public void setup(BuildingTypeSO buildingType , Vector3 pos , PosBuildingController posBuilding)
+        Controller.PosBuildingController posBuilding;
+        public void setup(BuildingTypeSO buildingType , Vector3 pos , Controller.PosBuildingController posBuilding)
         {
             this.buildingType = buildingType;
             this.pos = pos;

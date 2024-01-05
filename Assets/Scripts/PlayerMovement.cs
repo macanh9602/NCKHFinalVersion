@@ -11,8 +11,8 @@ namespace Scripts{
         [SerializeField] float speed = 10f;
         private HealthSysterm health;
         DayNightController dayNightController;
-        public PosBuildingController currentPosBuilding;
-        public Action<PosBuildingController> OnChangeCurrentPosBuilding;
+        public Controller.PosBuildingController currentPosBuilding;
+        public Action<Controller.PosBuildingController> OnChangeCurrentPosBuilding;
         public float costBuilding;
         private void Awake()
         {
@@ -35,9 +35,6 @@ namespace Scripts{
             //{
             //    health.OnDamage(30f);
             //}
-
-
-
         }
 
         private void Move()
@@ -51,8 +48,8 @@ namespace Scripts{
         {
             if(collision.gameObject.layer == 7)
             {
-                costBuilding = collision.GetComponent<PosBuildingController>().buildingType.money;
-                currentPosBuilding = collision.GetComponent<PosBuildingController>();
+                costBuilding = collision.GetComponent<Controller.PosBuildingController>().buildingType.money;
+                currentPosBuilding = collision.GetComponent<Controller.PosBuildingController>();
                 OnChangeCurrentPosBuilding?.Invoke(currentPosBuilding);
             }
             

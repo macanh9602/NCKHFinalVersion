@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Resources;
 using UnityEngine;
 
-namespace Scripts{
+namespace Scripts.Controller{
     
     public class PosBuildingController : MonoBehaviour
     {
