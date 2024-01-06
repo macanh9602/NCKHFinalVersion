@@ -225,6 +225,7 @@ MonoBehaviour:
   td: {fileID: 11400000, guid: 5741d0e2b3793644a99e5850fb1968d8, type: 2}
   PosSpawn: {fileID: 1919931983108289625}
   CanSeeEnemy: 0
+  pfArrow: {fileID: 578126915686876651, guid: 101acfcc8c2cedf449fc7b388b2a8ebc, type: 3}
 --- !u!1001 &7700294241959551989
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,10 +1,14 @@
-﻿using System.Collections;
+﻿
+using DG.Tweening;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 namespace Scripts.Controller{
     
-    public class ArcherController : MonoBehaviour
+    public class ArcherController : MonoBehaviour 
     {
         //check enemy
         //sinh arrow
@@ -14,16 +18,49 @@ namespace Scripts.Controller{
         private float timeCheckMax = .2f;
 
         private float timeSpawnDistance;
-        private float timeSpawnDistanceMax = .4f;
+        private float timeSpawnDistanceMax = .3f;
 
         [SerializeField] Transform PosSpawn;
         public bool CanSeeEnemy = false;
         public BuildingTypeSO TD => td;
 
-        private void Start()
+        [SerializeField] Arrow pfArrow;
+        //create local pool
+        private IObjectPool<Arrow> objectPool;
+
+        private void Awake()
         {
-            //tower = GetComponent<ThisTypeOfBuilding>().towerDefense;
+            objectPool = new ObjectPool<Arrow>(CreateProjectile,
+                OnGetFromPool, OnReleaseToPool, OnDestroyPooledObject,
+                true, 20, 100);
         }
+
+        // invoked when creating an item to populate the object pool
+        private Arrow CreateProjectile()
+        {
+            Arrow projectileInstance = Instantiate(pfArrow);
+            projectileInstance.ObjectPool = objectPool;
+            return projectileInstance;
+        }
+
+        // invoked when returning an item to the object pool
+        private void OnReleaseToPool(Arrow pooledObject)
+        {
+            pooledObject.gameObject.SetActive(false);
+        }
+
+        // invoked when retrieving the next item from the object pool
+        private void OnGetFromPool(Arrow pooledObject)
+        {
+            pooledObject.gameObject.SetActive(true);
+        }
+
+        // invoked when we exceed the maximum number of pooled items (i.e. destroy the pooled object)
+        private void OnDestroyPooledObject(Arrow pooledObject)
+        {
+            Destroy(pooledObject.gameObject);
+        }
+
         public void Update()
         {
             //timeSpawnDistanceMax = tower.SpawnArrowPerTime;
@@ -70,24 +107,23 @@ namespace Scripts.Controller{
                     }
                 }
 
-                //if(colliders.Length > 0 )
-                //{
-                //    targetEnemy = colliders[0].gameObject.GetComponent<Enemy>();
-                //}
-
             }
         }
         public void SpawnArrow()
         {
-            if (targetEnemy is not null)
+            if (targetEnemy is not null && objectPool != null)
             {
                 timeSpawnDistance -= Time.deltaTime;
                 if (timeSpawnDistance <= 0)
                 {
                     timeSpawnDistance = timeSpawnDistanceMax;
-                    //sinh now
-                    Arrow.OnCreate(targetEnemy , PosSpawn.position , this);
-                    //Debug.Log("k");
+                    Arrow arrow = objectPool.Get();
+                    if (arrow == null)
+                        return;
+                    //bat buoc set vi tri truoc roi moi bat arrow
+                    arrow.transform.position = PosSpawn.position;
+                    arrow.Init(targetEnemy , objectPool);
+
                 }
             }
 

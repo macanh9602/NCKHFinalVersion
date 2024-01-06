@@ -1,39 +1,66 @@
 ﻿using DG.Tweening;
+using Scripts.ObjectPool;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using System;
+using UnityEngine.Pool;
 
-namespace Scripts.Controller{
-    
+namespace Scripts.Controller
+{
+
     public class Arrow : MonoBehaviour
     {
-        public static Arrow OnCreate(Enemy target ,  Vector3 pos , ArcherController currentArcher)
-        {
-            //prf
-            Transform pfArrow = Resources.Load<Transform>("Arrow");
-            //
-            Transform Arrow  = Instantiate(pfArrow,pos , Quaternion.identity);
+        //public static Arrow OnCreate(Enemy target ,  Vector3 pos , ArcherController currentArcher)
+        //{
+        //    //prf
+        //    Transform pfArrow = Resources.Load<Transform>("Arrow");
+        //    //
+        //    Transform Arrow  = Instantiate(pfArrow,pos , Quaternion.identity);
 
-            //
-            Arrow arrow = Arrow.GetComponent<Arrow>();
-            //
-            arrow.setData(target,pos,currentArcher);
-            return arrow;
-        } // thieu muc tieu
+        //    //
+        //    Arrow arrow = Arrow.GetComponent<Arrow>();
+        //    //
+        //    //arrow.setData(target,pos,currentArcher);
+        //    return arrow;
+        //} // thieu muc tieu
 
         private Enemy target;
         private Vector3 pos;
         private Vector3 lastEnemyPosition;
         private Vector3 normalize;
         private ArcherController currentArcher;
-        private float time = 3f;
+        private float _lifetime = 3f;
+        //private PooledObject pooledObject;
+        //private ObjectPool<Arrow> _pool;
 
-        public void setData(Enemy target , Vector3 pos , ArcherController currentArcher)
+        private IObjectPool<Arrow> objectPool;
+
+        // public property to give the projectile a reference to its ObjectPool
+        public IObjectPool<Arrow> ObjectPool { set => objectPool = value; }
+
+        //public void setData(Enemy target , Vector3 pos , ArcherController currentArcher , ObjectPool<Arrow> pool)
+        //{
+        //    this.target = target;
+        //    this.pos = pos;
+        //    this.currentArcher = currentArcher;
+        //    //_pool = pool;
+        //    gameObject.SetActive(true);
+        //    //Invoke(nameof(Destroy), _lifetime);
+        //    //invoke
+        //}
+
+        public void Init(Enemy target , IObjectPool<Arrow> _pool)
         {
             this.target = target;
-            this.pos = pos;
-            this.currentArcher = currentArcher;
+            objectPool = _pool;
+            gameObject.SetActive(true);
+        }
+
+        private void Awake()
+        {
+            //pooledObject = GetComponent<PooledObject>();
         }
 
         private void Update()
@@ -41,21 +68,20 @@ namespace Scripts.Controller{
             //di chuyen den m,uc tieu
             //di chuyen
             Move();
+
             //Debug.Log(lastEnemyPosition);
             //dich chuyen theo farme
 
             //transform.position += normalize * speed * Time.deltaTime;
 
             StartCoroutine(gameObject.GetComponent<CurveMovement>().Curve(pos, lastEnemyPosition 
-                + Extension.Extension.getRandomPos(0.1f)));
+            + Extension.Extension.getRandomPos(0.1f)));
             //transform.DOMove(target.transform.position,2f);
 
-            ChangeRotation();
+            //ChangeRotation();
             SetTimeToDestroy();
         }
 
-        //ontriggerenter
-        //- tru mau + destroy
         public void Move()
         {
             //can vi tri cua target
@@ -94,24 +120,30 @@ namespace Scripts.Controller{
             {
                 if (collision.gameObject.tag == target.gameObject.tag)
                 {
+                    Debug.Log("halo");
                     HealthSysterm health = collision.GetComponent<HealthSysterm>();
                     health.OnDamage(currentArcher.TD.CanDamaging.damage);
                     //health.IsHealthChange();
-                    Destroy(gameObject);
+                    Destroy();
                 }
             }
 
         }
         private void SetTimeToDestroy()
         {
-            time -= Time.deltaTime;
-            if (time < 0)
+            _lifetime -= Time.deltaTime;
+            if (_lifetime <= 0)
             {
-                Destroy(gameObject);
-
+                //Destroy(gameObject);
+                Destroy();
             }
         }
+        private void Destroy()
+        {
+            objectPool.Release(this);
 
+        }
     }
-    
+
+
 }
