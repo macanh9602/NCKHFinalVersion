@@ -37,9 +37,9 @@ namespace Scripts.DayNightStateMachine
                 bool IsTouchPosBuilding = currentPosBuilding != null;
                 timer += Time.deltaTime;
                 Debug.Log(timer);           
-                LoadTimeUI.instance.UpdateTimer(timer, TimerRatio() , IsTouchPosBuilding);
                 if (IsTouchPosBuilding)
                 {
+                LoadTimeUI.instance.UpdateTimer(timer, TimerRatioBuild() , IsTouchPosBuilding);
                     if (player.costBuilding > 0 && (int)timer > coinCurrentPay)
                     {
                         coinCurrentPay++;
@@ -48,7 +48,7 @@ namespace Scripts.DayNightStateMachine
                     }
                     else if (player.costBuilding == 0 && coinCurrentPay < coinToBuild)
                         return;
-                    Debug.Log(coinCurrentPay + " nguonfg mau tu" + coinToBuild);
+                    //Debug.Log(coinCurrentPay + " nguonfg mau tu" + coinToBuild);
 
                     if (coinCurrentPay == coinToBuild )
                     {
@@ -62,10 +62,14 @@ namespace Scripts.DayNightStateMachine
                         
                     }
                 }
-                else if (timer >= timeChangeState)
+                else if (!IsTouchPosBuilding)
                 {
+                    LoadTimeUI.instance.UpdateTimer(timer, TimerRatioState(), false);
+                    if(timer >= timeChangeState)
+                    {
                     LoadTimeUI.instance.setUILoad(false);
                     dayNightController.TranstitionToState(new NightState(player));
+                    }
                 }
                     
             }
@@ -96,9 +100,13 @@ namespace Scripts.DayNightStateMachine
             else coinToBuild = 0f;
             
         }
-        public float TimerRatio()
+        public float TimerRatioState()
         {
             return timer/timeChangeState;
+        }
+        public float TimerRatioBuild()
+        {
+            return timer / coinToBuild;
         }
 
     }

@@ -11,9 +11,9 @@ namespace Scripts.Extension{
             return Camera.main.ScreenToWorldPoint(Input.mousePosition);
        }
 
-        public static Vector3 getRandomPos()
+        public static Vector3 getRandomPos(float i)
         {
-            return new Vector3(Random.Range(-1, 1) , Random.Range(-1,1));
+            return new Vector3(Random.Range(-i, i) , Random.Range(-i,i));
         }
     }
     

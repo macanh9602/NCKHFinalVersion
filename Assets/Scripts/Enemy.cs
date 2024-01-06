@@ -21,9 +21,11 @@ namespace Scripts{
 
         private Transform target;
         private Rigidbody2D rb;
+        private Vector3 startPos;
         private void Start()
         {
             rb = GetComponent<Rigidbody2D>();
+            startPos = transform.position;
         }
 
         private void CheckTarget()
@@ -38,7 +40,7 @@ namespace Scripts{
                 //giu nguyen vi tri  neu ko co muc tieu trong tam
                 target = transform;
             }
-            Debug.Log(target.gameObject.name);
+            //Debug.Log(target.gameObject.name);
         }
 
         private void Update()
@@ -46,8 +48,16 @@ namespace Scripts{
             if (target != null)
             {
                 Vector3 vectorNormalize = (target.position - transform.position).normalized;
-                float speed = UnityEngine.Random.Range(2f, 3f);
+                float speed = UnityEngine.Random.Range(0.5f, 1f);
+                
                 rb.velocity = vectorNormalize * speed;
+                float distanceMax = Vector3.Distance(target.position, startPos);
+                float currentDistance = Vector3.Distance(transform.position, startPos);
+                //Debug.Log(distanceMax + "halo" + currentDistance);
+                if (distanceMax - currentDistance <= 1f )
+                {
+                    rb.velocity = new Vector3(0,0,0);
+                }
             }
             else
             {

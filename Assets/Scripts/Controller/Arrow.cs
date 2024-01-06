@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -45,7 +46,9 @@ namespace Scripts.Controller{
 
             //transform.position += normalize * speed * Time.deltaTime;
 
-            StartCoroutine(gameObject.GetComponent<CurveMovement>().Curve(pos, lastEnemyPosition));
+            StartCoroutine(gameObject.GetComponent<CurveMovement>().Curve(pos, lastEnemyPosition 
+                + Extension.Extension.getRandomPos(0.1f)));
+            //transform.DOMove(target.transform.position,2f);
 
             ChangeRotation();
             SetTimeToDestroy();
@@ -94,7 +97,6 @@ namespace Scripts.Controller{
                     HealthSysterm health = collision.GetComponent<HealthSysterm>();
                     health.OnDamage(currentArcher.TD.CanDamaging.damage);
                     //health.IsHealthChange();
-                    //Debug.Log("hha");
                     Destroy(gameObject);
                 }
             }

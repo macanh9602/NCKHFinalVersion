@@ -21,7 +21,7 @@ namespace Scripts.Manager{
             if (Input.GetMouseButtonDown(0))
             {
                 //Enemy.Create(Extension.MousePosition(), enemyType);
-                Enemy.OnCreate(enemyType , pos[Random.Range(0, pos.Count)].position  + Extension.Extension.getRandomPos());
+                Enemy.OnCreate(enemyType , pos[Random.Range(0, pos.Count)].position  + Extension.Extension.getRandomPos(1));
             }
         }
     }

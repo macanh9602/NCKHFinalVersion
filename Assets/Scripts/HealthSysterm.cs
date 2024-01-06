@@ -18,7 +18,7 @@ namespace Scripts{
         public void OnDamage(float damage)
         {
             currentHealth -= damage;
-            Debug.Log(currentHealth);
+            //Debug.Log(currentHealth);
             currentHealth = Mathf.Clamp(currentHealth,0,healthMax);
             if(currentHealth <= 0)
             {

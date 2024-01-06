@@ -42,7 +42,7 @@ namespace Scripts.Controller{
             {
                 timeCheck += timeCheckMax;
                 //check now
-                Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 3f, LayerMask.GetMask("Monster"));
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 5f, LayerMask.GetMask("Monster"));
                 CanSeeEnemy = colliders.Length > 0 ? true : false;
                 //tao vong lap cac colli enemy
                 foreach (Collider2D collider in colliders)
