@@ -14,7 +14,7 @@ namespace Scripts{
             Transform pfbuildingConstruction = Resources.Load<Transform>("BuildingConstruction");
             //Debug.Log(pos);
             pfbuildingConstruction = Instantiate(pfbuildingConstruction , pos , Quaternion.identity);
-            pfbuildingConstruction.transform.parent = posBuilding.transform;
+            //pfbuildingConstruction.transform.parent = posBuilding.transform;
             BuildingConstruction buildingConstruction = pfbuildingConstruction.gameObject.GetComponent<BuildingConstruction>();
             buildingConstruction.setup(buildingType, pos , posBuilding);
             //Debug.Log(buildingConstruction.transform.position);

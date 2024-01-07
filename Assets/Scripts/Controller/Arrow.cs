@@ -1,85 +1,96 @@
 ﻿using DG.Tweening;
-using Scripts.ObjectPool;
+//using Scripts.ObjectPool;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using System;
 using UnityEngine.Pool;
+//using static UnityEngine.Rendering.ObjectPool<T>;
 
 namespace Scripts.Controller
 {
 
-    public class Arrow : MonoBehaviour
+    public class Arrow : MonoBehaviour , IPoolable<Arrow>
     {
-        //public static Arrow OnCreate(Enemy target ,  Vector3 pos , ArcherController currentArcher)
-        //{
-        //    //prf
-        //    Transform pfArrow = Resources.Load<Transform>("Arrow");
-        //    //
-        //    Transform Arrow  = Instantiate(pfArrow,pos , Quaternion.identity);
-
-        //    //
-        //    Arrow arrow = Arrow.GetComponent<Arrow>();
-        //    //
-        //    //arrow.setData(target,pos,currentArcher);
-        //    return arrow;
-        //} // thieu muc tieu
-
         private Enemy target;
         private Vector3 pos;
         private Vector3 lastEnemyPosition;
-        private Vector3 normalize;
+        private Vector3 direction;
         private ArcherController currentArcher;
-        private float _lifetime = 3f;
-        //private PooledObject pooledObject;
-        //private ObjectPool<Arrow> _pool;
+        private float _lifetime = 2f;
 
-        private IObjectPool<Arrow> objectPool;
+
+        private ObjectPool<Arrow> objectPool;
+
+        //curve
+        //do cong 2 chieeu time va do cao
+        [SerializeField] AnimationCurve curve;
+
+        //thoi gian
+        [SerializeField] float duration;
+
+        //do cao 
+        [SerializeField] float heightY;
+        float t;
+
 
         // public property to give the projectile a reference to its ObjectPool
-        public IObjectPool<Arrow> ObjectPool { set => objectPool = value; }
+        public ObjectPool<Arrow> ObjectPool { set => objectPool = value; }
+        public void Initialize(Action<Arrow> returnAction)
+        {
 
-        //public void setData(Enemy target , Vector3 pos , ArcherController currentArcher , ObjectPool<Arrow> pool)
-        //{
-        //    this.target = target;
-        //    this.pos = pos;
-        //    this.currentArcher = currentArcher;
-        //    //_pool = pool;
-        //    gameObject.SetActive(true);
-        //    //Invoke(nameof(Destroy), _lifetime);
-        //    //invoke
-        //}
+        }
+        public void ReturnToPool()
+        {
 
-        public void Init(Enemy target , IObjectPool<Arrow> _pool)
+        }
+        public void Init(Enemy target ,Vector3 pos, ObjectPool<Arrow> _pool , ArcherController current)
         {
             this.target = target;
+            this.pos = pos;
             objectPool = _pool;
-            gameObject.SetActive(true);
+            currentArcher = current;
+            this.gameObject.SetActive(true);
+        }
+        private void Start()
+        {
+            currentArcher.OnCreateArrow += OnCreateArrow;
+
         }
 
-        private void Awake()
+        public void OnCreateArrow()
         {
-            //pooledObject = GetComponent<PooledObject>();
+            if (target != null && objectPool != null)
+            {
+                //transform.position += normalize * 3 * time.deltatime;
+                //startcoroutine()
+                StartCoroutine(Curve(pos, target.transform.position));
+            }
         }
 
         private void Update()
         {
-            //di chuyen den m,uc tieu
-            //di chuyen
-            Move();
-
-            //Debug.Log(lastEnemyPosition);
-            //dich chuyen theo farme
-
-            //transform.position += normalize * speed * Time.deltaTime;
-
-            StartCoroutine(gameObject.GetComponent<CurveMovement>().Curve(pos, lastEnemyPosition 
-            + Extension.Extension.getRandomPos(0.1f)));
-            //transform.DOMove(target.transform.position,2f);
-
-            //ChangeRotation();
-            SetTimeToDestroy();
+                Move();
+                ChangeRotation();
+                //transform.getcomponent<curvemovement>().move(pos, lastenemyposition);
+                SetTimeToDestroy();
+        }
+        public IEnumerator Curve(Vector3 start, Vector3 end)
+        {
+            if (t >= (duration - 0.1f))
+            {
+                t = duration;
+            }
+            while (t <= duration)
+            {
+            t += Time.deltaTime;
+            Debug.Log(t);
+                //tinh toan do cao theo curve vaf duration
+                float heightCurrent = curve.Evaluate(t / duration) * heightY;
+                this.gameObject.transform.position = Vector3.Lerp(start, end, t / duration) + new Vector3(0, heightCurrent);  //+ do cao;
+                yield return null;
+            }
         }
 
         public void Move()
@@ -89,7 +100,7 @@ namespace Scripts.Controller
             //dk neu enemy bi destroy
             if (target != null)
             {
-                normalize = (target.transform.position - pos).normalized;
+                direction = (target.transform.position - pos).normalized;
                 lastEnemyPosition = target.transform.position;
             }
             else
@@ -98,19 +109,15 @@ namespace Scripts.Controller
                 {
                     Destroy(gameObject);
                 }
-                normalize = (lastEnemyPosition - pos).normalized;
+                direction = (lastEnemyPosition - pos).normalized;
                 //Debug.Log(lastEnemyPosition);
 
             }
-
-
-
-
         }
 
         public void ChangeRotation()
         {
-            float zIndex = Mathf.Atan2(normalize.y, normalize.x) * Mathf.Rad2Deg;
+            float zIndex = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, 0, zIndex);
         }
 
@@ -136,11 +143,15 @@ namespace Scripts.Controller
             {
                 //Destroy(gameObject);
                 Destroy();
+                _lifetime = 2;
             }
         }
         private void Destroy()
         {
-            objectPool.Release(this);
+            t = 0f;
+            target = null;
+            transform.position = pos;
+            objectPool.Push(this);
 
         }
     }

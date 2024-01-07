@@ -31,6 +31,22 @@ namespace Scripts{
                 yield return null;
             }
         }
+
+        public void move(Vector3 start, Vector3 end)
+        {
+            t += Time.deltaTime;
+            if (t >= (duration - 0.1f))
+            {
+                t = duration;
+            }
+            while (t <= duration)
+            {
+                //tinh toan do cao theo curve vaf duration
+                float heightCurrent = curve.Evaluate(t / duration) * heightY;
+                this.gameObject.transform.position = Vector3.Lerp(start, end, t / duration) + new Vector3(0, heightCurrent);  //+ do cao;
+                
+            }
+        }
     }
     
 }

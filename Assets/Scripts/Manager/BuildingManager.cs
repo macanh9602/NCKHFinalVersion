@@ -16,7 +16,7 @@ namespace Scripts.Manager{
         {
             //Debug.Log("halo");
             Transform building = Instantiate(buildingType.prefabs, pos, Quaternion.identity);
-            building.transform.parent = posBuilding.transform;
+            //building.transform.parent = posBuilding.transform;
         }
     }
     

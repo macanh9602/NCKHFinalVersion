@@ -5,6 +5,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using static UnityEditor.PlayerSettings;
+//using static UnityEngine.Rendering.ObjectPool<T>;
+//using static UnityEngine.Rendering.ObjectPool<T>;
 
 namespace Scripts.Controller{
     
@@ -18,47 +21,42 @@ namespace Scripts.Controller{
         private float timeCheckMax = .2f;
 
         private float timeSpawnDistance;
-        private float timeSpawnDistanceMax = .3f;
+        private float timeSpawnDistanceMax = .2f;
 
         [SerializeField] Transform PosSpawn;
         public bool CanSeeEnemy = false;
         public BuildingTypeSO TD => td;
 
-        [SerializeField] Arrow pfArrow;
+        [SerializeField] GameObject pfArrow;
         //create local pool
-        private IObjectPool<Arrow> objectPool;
+        //private IObjectPool<Arrow> objectPool;
+        //private ObjectPool<Arrow> arrowPool;
+
+        private ObjectPool<Arrow> objectPool;
+        public Action OnCreateArrow;
 
         private void Awake()
         {
-            objectPool = new ObjectPool<Arrow>(CreateProjectile,
-                OnGetFromPool, OnReleaseToPool, OnDestroyPooledObject,
-                true, 20, 100);
+            //objectPool = new ObjectPool<Arrow>(CreateProjectile,
+            //    OnGetFromPool, OnReleaseToPool, OnDestroyPooledObject,
+            //    true, 20, 100);
+            objectPool = new ObjectPool<Arrow>(pfArrow, OnPullObject, OnPushObject, 10);
+        }
+        private void OnPullObject(Arrow obj)
+        {
+            // Logic tùy chỉnh khi lấy một đối tượng từ pool
+            // Bạn có thể tùy chỉnh đối tượng thêm nếu cần
+            obj.Init(targetEnemy, this.transform.position, objectPool , this);
+            obj.gameObject.SetActive(true);
+            
         }
 
-        // invoked when creating an item to populate the object pool
-        private Arrow CreateProjectile()
+        private void OnPushObject(Arrow obj)
         {
-            Arrow projectileInstance = Instantiate(pfArrow);
-            projectileInstance.ObjectPool = objectPool;
-            return projectileInstance;
-        }
-
-        // invoked when returning an item to the object pool
-        private void OnReleaseToPool(Arrow pooledObject)
-        {
-            pooledObject.gameObject.SetActive(false);
-        }
-
-        // invoked when retrieving the next item from the object pool
-        private void OnGetFromPool(Arrow pooledObject)
-        {
-            pooledObject.gameObject.SetActive(true);
-        }
-
-        // invoked when we exceed the maximum number of pooled items (i.e. destroy the pooled object)
-        private void OnDestroyPooledObject(Arrow pooledObject)
-        {
-            Destroy(pooledObject.gameObject);
+            targetEnemy = null;
+            transform.position = transform.position;
+            obj.gameObject.SetActive(false);
+            // Logic tùy chỉnh khi đưa đối tượng trở lại pool
         }
 
         public void Update()
@@ -109,20 +107,27 @@ namespace Scripts.Controller{
 
             }
         }
+        //private int count = 1;
         public void SpawnArrow()
         {
             if (targetEnemy is not null && objectPool != null)
             {
+                //Debug.Log("halo1");
                 timeSpawnDistance -= Time.deltaTime;
+                //Debug.Log(timeSpawnDistance);
                 if (timeSpawnDistance <= 0)
                 {
+                    //Debug.Log("halo2");
                     timeSpawnDistance = timeSpawnDistanceMax;
-                    Arrow arrow = objectPool.Get();
-                    if (arrow == null)
-                        return;
+                    Arrow arrow = objectPool.Pull();
+                    //Debug.Log(arrow);
+                    //if (arrow == null)
+                       // return;
                     //bat buoc set vi tri truoc roi moi bat arrow
-                    arrow.transform.position = PosSpawn.position;
-                    arrow.Init(targetEnemy , objectPool);
+                    arrow.transform.position = this.transform.position;
+                    OnCreateArrow?.Invoke();
+                    
+                    //count++;
 
                 }
             }

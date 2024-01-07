@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Scripts.ObjectPool {
+namespace Scripts{
     
     public interface IPoolable<T>
     {
