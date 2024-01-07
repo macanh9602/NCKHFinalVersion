@@ -46,3 +46,6 @@ TagManager:
   - name: building
     uniqueID: 2612333341
     locked: 0
+  - name: player
+    uniqueID: 3691473117
+    locked: 0

@@ -54,7 +54,7 @@ namespace Scripts.Controller{
         private void OnPushObject(Arrow obj)
         {
             targetEnemy = null;
-            transform.position = transform.position;
+            //obj.transform.position = transform.position;
             obj.gameObject.SetActive(false);
             // Logic tùy chỉnh khi đưa đối tượng trở lại pool
         }

@@ -11,7 +11,7 @@ namespace Scripts
         public string nameBuilding;
         public Transform prefabs;
         public float timeBuild;
-        public float money;
+        public int money;
         public Sprite sprite;
         public Sprite icon;
         public Damaging CanDamaging;

@@ -13,6 +13,7 @@ namespace Scripts.DayNightStateMachine{
         private float timeSpeed = 0.2f;
         public PlayerMovement player;
         private DayNightController dayNightController;
+        [SerializeField] List<Transform> lstTorch;
 
         private void Start()
         {
@@ -26,11 +27,20 @@ namespace Scripts.DayNightStateMachine{
         {
             if(currentState.GetType() == typeof(DayState))
             {
-                StartCoroutine(ExcuteNightView());
+                StartCoroutine(ExecuteDayView());
             }
             else if (currentState.GetType() == typeof(NightState))
             {
                 StartCoroutine(ExcuteNightView());
+            }
+        }
+
+        private void TurnOnLight()
+        {
+            foreach(Transform go in lstTorch)
+            {
+                //Debug.Log("halo");
+                go.Find("Light").gameObject.SetActive(true);
             }
         }
 
@@ -44,6 +54,7 @@ namespace Scripts.DayNightStateMachine{
                 if (time >= 0.99f)
                 {
                     time = 1f;
+                    TurnOnLight();
                 }
                 yield return null;
             }

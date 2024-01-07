@@ -143,7 +143,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   duration: 1
-  heightY: 1
+  heightY: 2
 --- !u!1 &5036155887255400246
 GameObject:
   m_ObjectHideFlags: 0

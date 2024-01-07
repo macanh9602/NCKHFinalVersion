@@ -25,7 +25,7 @@ namespace Scripts.DayNightStateMachine
         {
             //nd dau buoi sang
             OnChangeCurrentPosBuilding(player.currentPosBuilding);
-            timeChangeState = 5f;
+            timeChangeState = 3f;
             player.OnChangeCurrentPosBuilding += OnChangeCurrentPosBuilding;
             
         }
@@ -37,7 +37,7 @@ namespace Scripts.DayNightStateMachine
                 bool IsTouchPosBuilding = currentPosBuilding != null;
                 timer += Time.deltaTime;
                 Debug.Log(timer);           
-                if (IsTouchPosBuilding)
+                if (IsTouchPosBuilding && !currentPosBuilding.IsBuild)
                 {
                 LoadTimeUI.instance.UpdateTimer(timer, TimerRatioBuild() , IsTouchPosBuilding , currentPosBuilding.buildingType);
                     if (player.costBuilding > 0 && (int)timer > coinCurrentPay)
@@ -50,12 +50,13 @@ namespace Scripts.DayNightStateMachine
                         return;
                     //Debug.Log(coinCurrentPay + " nguonfg mau tu" + coinToBuild);
 
-                    if (coinCurrentPay == coinToBuild )
+                    if (coinCurrentPay >= coinToBuild )
                     {
                         //Build
                         //currentPosBuilding.Build();
                         Debug.Log("halo");
                         BuildingConstruction building = BuildingConstruction.Create(currentPosBuilding.buildingType, currentPosBuilding.transform.position , currentPosBuilding);
+                        Manager.ResourceManager.Instance.CalculateCost(currentPosBuilding.buildingType.money);
                         currentPosBuilding.setIsBuild();
                         coinCurrentPay = 0f;
                         timer = 0f;
