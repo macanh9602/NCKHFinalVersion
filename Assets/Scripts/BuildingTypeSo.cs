@@ -26,5 +26,12 @@ namespace Scripts
         public string typeOfWeapon;
     }
 
+    [System.Serializable]
+    public class Receivable
+    {
+        public float moneyReceivable;
+    }
+
+
 
 }
