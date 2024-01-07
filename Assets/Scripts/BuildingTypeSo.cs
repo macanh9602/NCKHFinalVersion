@@ -13,6 +13,7 @@ namespace Scripts
         public float timeBuild;
         public float money;
         public Sprite sprite;
+        public Sprite icon;
         public Damaging CanDamaging;
 
     }

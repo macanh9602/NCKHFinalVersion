@@ -7,7 +7,8 @@ namespace Scripts.DayNightStateMachine {
     
     public class DayNightController : MonoBehaviour
     {
-        public IDayNight currentState;
+        private IDayNight currentState;
+        public IDayNight CurrentState => currentState;
         public event Action<IDayNight> OnDayNightStateChange;
         public void TranstitionToState(IDayNight nextState)
         {

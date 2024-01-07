@@ -36,7 +36,7 @@ namespace Scripts.DayNightStateMachine{
 
         private IEnumerator ExcuteNightView()
         {
-            while (dayNightController.currentState.GetType() == typeof(NightState) && time < 1f)
+            while (dayNightController.CurrentState.GetType() == typeof(NightState) && time < 1f)
             {
                 time += Time.deltaTime * timeSpeed;
 
@@ -51,7 +51,7 @@ namespace Scripts.DayNightStateMachine{
 
         private IEnumerator ExecuteDayView()
         {
-            while (dayNightController.currentState.GetType() == typeof(DayState) && time > 0f)
+            while (dayNightController.CurrentState.GetType() == typeof(DayState) && time > 0f)
             {
                 time -= Time.deltaTime * timeSpeed; // Giảm dần thời gian
 

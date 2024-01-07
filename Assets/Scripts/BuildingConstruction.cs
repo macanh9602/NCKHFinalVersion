@@ -7,18 +7,13 @@ namespace Scripts{
     
     public class BuildingConstruction : MonoBehaviour
     {
-        //1 lop static tao hieu ung co tham so truyen vao la buidlingtype va vi tri (tu gameobject chua component
-        //posbuildingcontroller)
         public static BuildingConstruction Create(BuildingTypeSO buildingType, Vector3 pos , Controller.PosBuildingController posBuilding)
         {
             Transform pfbuildingConstruction = Resources.Load<Transform>("BuildingConstruction");
             //Debug.Log(pos);
             pfbuildingConstruction = Instantiate(pfbuildingConstruction , pos , Quaternion.identity);
-            //pfbuildingConstruction.transform.parent = posBuilding.transform;
             BuildingConstruction buildingConstruction = pfbuildingConstruction.gameObject.GetComponent<BuildingConstruction>();
             buildingConstruction.setup(buildingType, pos , posBuilding);
-            //Debug.Log(buildingConstruction.transform.position);
-            //Debug.Log(buildingType.name);
             return buildingConstruction;
         }
 

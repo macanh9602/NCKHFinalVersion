@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Scripts.DayNightStateMachine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +17,8 @@ namespace Scripts.Controller{
 
         public void OnChangeCurrentPosBuilding(PosBuildingController currentPosBuilding)
         {
-            if(currentPosBuilding != null)
+            if(currentPosBuilding != null && 
+                player.GetComponent<DayNightController>().CurrentState.GetType() == typeof(DayState))
             {
                 if(currentPosBuilding.IsBuild == false)
                 Show(currentPosBuilding);

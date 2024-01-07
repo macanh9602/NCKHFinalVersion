@@ -39,7 +39,7 @@ namespace Scripts.DayNightStateMachine
                 Debug.Log(timer);           
                 if (IsTouchPosBuilding)
                 {
-                LoadTimeUI.instance.UpdateTimer(timer, TimerRatioBuild() , IsTouchPosBuilding);
+                LoadTimeUI.instance.UpdateTimer(timer, TimerRatioBuild() , IsTouchPosBuilding , currentPosBuilding.buildingType);
                     if (player.costBuilding > 0 && (int)timer > coinCurrentPay)
                     {
                         coinCurrentPay++;
@@ -64,7 +64,7 @@ namespace Scripts.DayNightStateMachine
                 }
                 else if (!IsTouchPosBuilding)
                 {
-                    LoadTimeUI.instance.UpdateTimer(timer, TimerRatioState(), false);
+                    LoadTimeUI.instance.UpdateTimer(timer, TimerRatioState(), IsTouchPosBuilding, null);
                     if(timer >= timeChangeState)
                     {
                     LoadTimeUI.instance.setUILoad(false);
