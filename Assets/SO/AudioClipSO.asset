@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e830ac9d2854e2f478ec6f403bef6a18, type: 3}
+  m_Name: AudioClipSO
+  m_EditorClassIdentifier: 
+  nightCallStart: {fileID: 8300000, guid: 9ab8ce2d50bd8b748b05b94872993957, type: 3}
+  nightCallComplete: {fileID: 8300000, guid: ca0712bda0623514782939f68341cb0f, type: 3}
+  startPay: {fileID: 8300000, guid: 8fefbafc968a1744a9bf7db95b8b2d86, type: 3}
+  excutedPay: {fileID: 8300000, guid: cc729c26951b3f8438125171227ae075, type: 3}
+  successPay: {fileID: 8300000, guid: cc729c26951b3f8438125171227ae075, type: 3}
+  successBuild: {fileID: 8300000, guid: 1634faecfee85d84b8b70eee191acc40, type: 3}
+  shootSounds:
+  - {fileID: 8300000, guid: 2735c25848fec614e8eec70ce5cbf4e7, type: 3}
+  - {fileID: 8300000, guid: 1d78c2655adc5d04cb606b1a885018c1, type: 3}
+  victory: {fileID: 8300000, guid: 220e1b6c739256f45b9049dde45ad0c8, type: 3}
+  repair: {fileID: 8300000, guid: be3c04420c03924478245d6407af0627, type: 3}
+  addCoins:
+  - {fileID: 8300000, guid: 1486a93284794524d986bc074c6befc8, type: 3}
+  - {fileID: 8300000, guid: 005088ded2238984e9794766ae402750, type: 3}
+  lose: {fileID: 8300000, guid: 8d97d987d2c220641bd70fc385763e40, type: 3}

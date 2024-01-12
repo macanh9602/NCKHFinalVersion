@@ -14,8 +14,9 @@ namespace Scripts
         public int money;
         public Sprite sprite;
         public Sprite icon;
+        public string details;
         public Damaging CanDamaging;
-
+        public Receivable CanReceivable;
     }
 
     [System.Serializable]

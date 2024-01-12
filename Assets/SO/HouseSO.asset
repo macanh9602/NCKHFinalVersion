@@ -18,7 +18,11 @@ MonoBehaviour:
   money: 3
   sprite: {fileID: -213113268, guid: 61e45fbc2075d964982416b09d1f903a, type: 3}
   icon: {fileID: 21300000, guid: b6489b34c4d0284459c26f3e6963c561, type: 3}
+  details: "House cho ph\xE9p b\u1EA1n nh\u1EADn 1 ti\u1EC1n sau m\u1ED7i \u0111\xEAm
+    ph\xF2ng th\u1EE7 th\xE0nh c\xF4ng ( n\u1EBFu n\xF3 kh\xF4ng b\u1ECB ph\xE1 h\u1EE7y)"
   CanDamaging:
     damage: 0
     amor: 0
     typeOfWeapon: 
+  CanReceivable:
+    moneyReceivable: 0
