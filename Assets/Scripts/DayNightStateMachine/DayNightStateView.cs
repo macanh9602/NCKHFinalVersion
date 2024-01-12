@@ -10,7 +10,7 @@ namespace Scripts.DayNightStateMachine{
         [SerializeField] private Gradient gradient;
         private Light2D light2d;
         private float time;
-        private float timeSpeed = 0.2f;
+        private float timeSpeed = 0.5f;
         public PlayerMovement player;
         private DayNightController dayNightController;
         [SerializeField] List<Transform> lstTorch;

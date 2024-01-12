@@ -13,7 +13,7 @@ namespace Scripts.DayNightStateMachine{
         }
         public void Enter(DayNightController dayNightController)
         {
-
+            Manager.SoundManager.Instance.PlaySound(Manager.SoundManager.Instance.ClipSO.NightCallComplete);
         }
 
         public void Excuted(DayNightController dayNightController)

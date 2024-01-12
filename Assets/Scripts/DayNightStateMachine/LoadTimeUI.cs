@@ -15,6 +15,8 @@ namespace Scripts{
         [SerializeField] Image imgType;
         [SerializeField] Image imgTypeStandard;
         private Sprite imgStandard;
+        [SerializeField] Ease ease;
+        private RectTransform rectTransform;
         public static LoadTimeUI instance { get; private set; }
 
         private void Awake()
@@ -23,6 +25,7 @@ namespace Scripts{
             timerText.text = "";
             this.gameObject.SetActive(false);
             imgStandard = imgType.sprite;
+            rectTransform = GetComponent<RectTransform>();
         }
 
         public void UpdateTimer(float timerValue, float timeNormalize, bool IsTouchPosBuilding, BuildingTypeSO buildingType)
@@ -62,7 +65,8 @@ namespace Scripts{
         }
         public void setUILoad(bool IsOke)
         {
-            this.gameObject.SetActive(IsOke);
+             rectTransform.DOScale(new Vector3(2,2,2),3f).SetEase(ease).OnComplete(() => { this.gameObject.SetActive(IsOke); });
+            
         }
         
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Scripts.Manager;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
@@ -25,18 +26,23 @@ namespace Scripts.DayNightStateMachine
         {
             //nd dau buoi sang
             OnChangeCurrentPosBuilding(player.currentPosBuilding);
-            timeChangeState = 3f;
+            timeChangeState = 2.5f;
             player.OnChangeCurrentPosBuilding += OnChangeCurrentPosBuilding;
             
         }
         public void Excuted(DayNightController dayNightController)
         {
+            //bool isNightCallStarted = false;
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                Manager.SoundManager.Instance.PlaySound(Manager.SoundManager.Instance.ClipSO.NightCallStart);
+            }
             //logic thuc thi
             if (Input.GetKey(KeyCode.Space))
             {
                 bool IsTouchPosBuilding = currentPosBuilding != null;
                 timer += Time.deltaTime;
-                Debug.Log(timer);           
+                //Debug.Log(timer);           
                 if (IsTouchPosBuilding && !currentPosBuilding.IsBuild)
                 {
                 LoadTimeUI.instance.UpdateTimer(timer, TimerRatioBuild() , IsTouchPosBuilding , currentPosBuilding.buildingType);
@@ -54,7 +60,7 @@ namespace Scripts.DayNightStateMachine
                     {
                         //Build
                         //currentPosBuilding.Build();
-                        Debug.Log("halo");
+                        //Debug.Log("halo");
                         BuildingConstruction building = BuildingConstruction.Create(currentPosBuilding.buildingType, currentPosBuilding.transform.position , currentPosBuilding);
                         Manager.ResourceManager.Instance.CalculateCost(currentPosBuilding.buildingType.money);
                         currentPosBuilding.setIsBuild();
@@ -65,7 +71,9 @@ namespace Scripts.DayNightStateMachine
                 }
                 else if (!IsTouchPosBuilding)
                 {
-                    LoadTimeUI.instance.UpdateTimer(timer, TimerRatioState(), IsTouchPosBuilding, null);
+                    //Debug.Log("halo");
+                    //isNightCallStarted = true;
+                    LoadTimeUI.instance.UpdateTimer(timer, TimerRatioState(), IsTouchPosBuilding, null);    
                     if(timer >= timeChangeState)
                     {
                     LoadTimeUI.instance.setUILoad(false);
