@@ -16,6 +16,7 @@ namespace Scripts.Manager{
         {
             //Debug.Log("halo");
             Transform building = Instantiate(buildingType.prefabs, pos, Quaternion.identity);
+            Manager.SoundManager.Instance.PlaySound(Manager.SoundManager.Instance.ClipSO.SuccessBuild);
             //building.transform.parent = posBuilding.transform;
         }
     }

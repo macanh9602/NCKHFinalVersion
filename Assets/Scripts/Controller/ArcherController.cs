@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
-using static UnityEditor.PlayerSettings;
+//using static UnityEditor.PlayerSettings;
 //using static UnityEngine.Rendering.ObjectPool<T>;
 //using static UnityEngine.Rendering.ObjectPool<T>;
 
@@ -120,6 +120,7 @@ namespace Scripts.Controller{
                     //Debug.Log("halo2");
                     timeSpawnDistance = timeSpawnDistanceMax;
                     Arrow arrow = objectPool.Pull();
+                    Manager.SoundManager.Instance.PlaySound(Manager.SoundManager.Instance.ClipSO.ShootSounds.GetRandomClip());
                     //Debug.Log(arrow);
                     //if (arrow == null)
                        // return;

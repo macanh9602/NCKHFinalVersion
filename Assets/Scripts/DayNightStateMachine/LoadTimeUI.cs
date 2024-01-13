@@ -28,7 +28,7 @@ namespace Scripts{
             rectTransform = GetComponent<RectTransform>();
         }
 
-        public void UpdateTimer(float timerValue, float timeNormalize, bool IsTouchPosBuilding, BuildingTypeSO buildingType)
+        public void UpdateTimer(float timerValue, float timeNormalize, bool IsTouchPosBuilding , BuildingTypeSO buildingType)
         {
             this.gameObject.SetActive(true);
             if (timerText != null && imgLoad != null)
@@ -63,9 +63,17 @@ namespace Scripts{
                 imgType.sprite = imgStandard;
             else imgType.sprite = buildingType.icon;
         }
-        public void setUILoad(bool IsOke)
+        public void setUILoad(bool isActiveUI , bool isNightCallComplete)
         {
-             rectTransform.DOScale(new Vector3(2,2,2),3f).SetEase(ease).OnComplete(() => { this.gameObject.SetActive(IsOke); });
+            if(isNightCallComplete == false)
+            {
+                this.gameObject.SetActive(isNightCallComplete);
+            }
+            else
+            {
+                rectTransform.DOScale(new Vector3(2,2,2),3f).SetEase(ease).OnComplete(() => { 
+                this.gameObject.SetActive(isActiveUI); });
+            }
             
         }
         

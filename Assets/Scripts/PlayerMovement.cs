@@ -18,6 +18,7 @@ namespace Scripts{
         {
             dayNightController = GetComponent<DayNightController>();
             dayNightController.TranstitionToState(new DayState(this));
+            //dayNightController.StartState(new DayState(this));
         }
         // Start is called before the first frame update
         void Start()

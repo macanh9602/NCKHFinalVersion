@@ -23,6 +23,11 @@ namespace Scripts.Manager{
         {
             audioSource.PlayOneShot(audio);
         }
+
+        public void StopSound()
+        {
+            audioSource.Stop();
+        }
     
     }
     

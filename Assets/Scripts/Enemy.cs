@@ -53,11 +53,6 @@ namespace Scripts{
                 rb.velocity = vectorNormalize * speed;
                 float distanceMax = Vector3.Distance(target.position, startPos);
                 float currentDistance = Vector3.Distance(transform.position, startPos);
-                //Debug.Log(distanceMax + "halo" + currentDistance);
-                //if (distanceMax - currentDistance <= 1f )
-                //{
-                //    rb.velocity = new Vector3(0,0,0);
-                //}
             }
             else
             {
@@ -72,12 +67,10 @@ namespace Scripts{
             {
                 HealthSysterm health = collision.gameObject.GetComponent<HealthSysterm>();
                 health.OnDamage(200f);
-                //health.IsHealthChange();        
-
                 Destroy(gameObject);
-                // isdestroy = true;
             }
         }
+
 
     }
 

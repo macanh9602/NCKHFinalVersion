@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using Scripts.Controller;
+using Scripts.DayNightStateMachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace Scripts
 
         private void OnChangeCurrentPosBuilding(PosBuildingController controller)
         {
-            if (controller != null)
+            if (controller != null && player.GetComponent<DayNightController>().CurrentState.GetType() == typeof(DayState))
             {
                 Show(controller);
             }

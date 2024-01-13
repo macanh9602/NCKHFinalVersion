@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameBuilding: Archer Tower
   prefabs: {fileID: 5600500097335745406, guid: 69c65cad03d0b52488b5ad1c398ec5a1, type: 3}
-  timeBuild: 2
-  money: 2
+  timeBuild: 0.5
+  money: 4
   sprite: {fileID: 21300000, guid: 25f025660d1ae3f408ce6e91a36b4a3e, type: 3}
   icon: {fileID: 21300000, guid: bd2448f58918d664dadc5b9c3f95e159, type: 3}
   details: "Archer c\xF3 t\u1EA7m b\u1EAFn kh\xE1 xa , kh\xF4ng gi\u1ED1ng nh\u01B0

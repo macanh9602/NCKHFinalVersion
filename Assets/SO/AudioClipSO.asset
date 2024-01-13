@@ -19,11 +19,11 @@ MonoBehaviour:
   successPay: {fileID: 8300000, guid: cc729c26951b3f8438125171227ae075, type: 3}
   successBuild: {fileID: 8300000, guid: 1634faecfee85d84b8b70eee191acc40, type: 3}
   shootSounds:
-  - {fileID: 8300000, guid: 2735c25848fec614e8eec70ce5cbf4e7, type: 3}
-  - {fileID: 8300000, guid: 1d78c2655adc5d04cb606b1a885018c1, type: 3}
+    clips:
+    - {fileID: 8300000, guid: 2735c25848fec614e8eec70ce5cbf4e7, type: 3}
+    - {fileID: 8300000, guid: 1d78c2655adc5d04cb606b1a885018c1, type: 3}
   victory: {fileID: 8300000, guid: 220e1b6c739256f45b9049dde45ad0c8, type: 3}
   repair: {fileID: 8300000, guid: be3c04420c03924478245d6407af0627, type: 3}
   addCoins:
-  - {fileID: 8300000, guid: 1486a93284794524d986bc074c6befc8, type: 3}
-  - {fileID: 8300000, guid: 005088ded2238984e9794766ae402750, type: 3}
-  lose: {fileID: 8300000, guid: 8d97d987d2c220641bd70fc385763e40, type: 3}
+    clips: []
+  defeat: {fileID: 0}

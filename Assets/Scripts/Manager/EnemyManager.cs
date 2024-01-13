@@ -6,16 +6,21 @@ namespace Scripts.Manager{
     
     public class EnemyManager : MonoBehaviour
     {
-        public EnemyTypeSO enemyType;
-        public List<Transform> pos;
+        [SerializeField] EnemyTypeSO enemyType;
+        [SerializeField] List<Transform> pos;
+        [SerializeField] int enemiesDieAmount;
+        public int EnemiesDieAmount => enemiesDieAmount;
+
+        public static EnemyManager Instance { get; private set; }
+
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
-            
+            Instance = this;
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             //sua lai thanh dieu kien khi ban ngay ket thuc , man dem bat dau
             if (Input.GetMouseButtonDown(0))
@@ -23,6 +28,11 @@ namespace Scripts.Manager{
                 //Enemy.Create(Extension.MousePosition(), enemyType);
                 Enemy.OnCreate(enemyType , pos[Random.Range(0, pos.Count)].position  + Extension.Extension.getRandomPos(1));
             }
+        }
+
+        public void addEnemiesDie(int i)
+        {
+            enemiesDieAmount += i;
         }
     }
     

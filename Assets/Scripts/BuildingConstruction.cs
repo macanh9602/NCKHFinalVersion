@@ -14,6 +14,7 @@ namespace Scripts{
             pfbuildingConstruction = Instantiate(pfbuildingConstruction , pos , Quaternion.identity);
             BuildingConstruction buildingConstruction = pfbuildingConstruction.gameObject.GetComponent<BuildingConstruction>();
             buildingConstruction.setup(buildingType, pos , posBuilding);
+            //Manager.SoundManager.Instance.PlaySound(Manager.SoundManager.Instance.ClipSO.SuccessPay);
             return buildingConstruction;
         }
 

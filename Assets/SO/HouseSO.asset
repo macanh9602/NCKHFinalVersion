@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameBuilding: House
   prefabs: {fileID: 8387035741673672931, guid: 4208451db178833458fe6115efb87bbb, type: 3}
-  timeBuild: 3
+  timeBuild: 0.5
   money: 3
   sprite: {fileID: -213113268, guid: 61e45fbc2075d964982416b09d1f903a, type: 3}
   icon: {fileID: 21300000, guid: b6489b34c4d0284459c26f3e6963c561, type: 3}

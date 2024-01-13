@@ -85,7 +85,7 @@ namespace Scripts.Controller
             while (t <= duration)
             {
             t += Time.deltaTime;
-            Debug.Log(t);
+            //Debug.Log(t);
                 //tinh toan do cao theo curve vaf duration
                 float heightCurrent = curve.Evaluate(t / duration) * heightY;
                 this.gameObject.transform.position = Vector3.Lerp(start, end, t / duration) + new Vector3(0, heightCurrent);  //+ do cao;
@@ -127,7 +127,7 @@ namespace Scripts.Controller
             {
                 if (collision.gameObject.tag == target.gameObject.tag)
                 {
-                    Debug.Log("halo");
+                    //Debug.Log("halo");
                     HealthSysterm health = collision.GetComponent<HealthSysterm>();
                     health.OnDamage(currentArcher.TD.CanDamaging.damage);
                     //health.IsHealthChange();
@@ -152,7 +152,6 @@ namespace Scripts.Controller
             target = null;
             transform.position = pos;
             objectPool.Push(this);
-
         }
     }
 
