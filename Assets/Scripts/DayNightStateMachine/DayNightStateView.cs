@@ -21,6 +21,7 @@ namespace Scripts.DayNightStateMachine{
 
             dayNightController = player.GetComponent<DayNightController>();
             player.GetComponent<DayNightController>().OnDayNightStateChange += DayNightStateView_OnDayNightStateChange;
+            TurnOnLight(false);
         }
 
         private void DayNightStateView_OnDayNightStateChange(IDayNight currentState)
@@ -35,12 +36,13 @@ namespace Scripts.DayNightStateMachine{
             }
         }
 
-        private void TurnOnLight()
+        private void TurnOnLight(bool isActive)
         {
             foreach(Transform go in lstTorch)
             {
                 //Debug.Log("halo");
-                go.Find("Light").gameObject.SetActive(true);
+                go.Find("sprite_fire").gameObject.SetActive(isActive);
+                go.Find("Light").gameObject.SetActive(isActive);
             }
         }
 
@@ -54,7 +56,7 @@ namespace Scripts.DayNightStateMachine{
                 if (time >= 0.99f)
                 {
                     time = 1f;
-                    TurnOnLight();
+                    TurnOnLight(true);
                 }
                 yield return null;
             }
@@ -71,6 +73,7 @@ namespace Scripts.DayNightStateMachine{
                 if (time <= 0.01f)
                 {
                     time = 0f;
+                    TurnOnLight(false);
                 }
 
                 Debug.Log(time);

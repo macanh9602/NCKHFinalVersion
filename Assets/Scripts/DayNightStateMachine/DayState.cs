@@ -32,9 +32,6 @@ namespace Scripts.DayNightStateMachine
             OnChangeCurrentPosBuilding(player.currentPosBuilding);
             timeChangeState = 2.5f;
             player.OnChangeCurrentPosBuilding += OnChangeCurrentPosBuilding;
-
-            //Manager.SoundManager.Instance.PlaySound(Manager.SoundManager.Instance.ClipSO.Repair);
-
         }
         public void Excuted(DayNightController dayNightController)
         {
@@ -92,6 +89,7 @@ namespace Scripts.DayNightStateMachine
                         LoadTimeUI.instance.setUILoad(IsActiveUILoad , IsNightCallComplete);
                         dayNightController.TranstitionToState(new NightState(player));
                         timer = 0f;
+                        //Debug.Log("hahaha");
                     }
                 }
                     
@@ -105,6 +103,7 @@ namespace Scripts.DayNightStateMachine
                     Manager.SoundManager.Instance.StopSound();
                 }
                 LoadTimeUI.instance.setUILoad(IsActiveUILoad, IsNightCallComplete);
+                //Debug.Log("hohoho");
                 if (coinCurrentPay > 0)
                     player.costBuilding += coinCurrentPay; //return
                     coinCurrentPay = 0;

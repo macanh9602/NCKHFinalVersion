@@ -13,7 +13,7 @@ namespace Scripts{
         [SerializeField] TMP_Text timerText;
         [SerializeField] Image imgLoad;
         [SerializeField] Image imgType;
-        [SerializeField] Image imgTypeStandard;
+        //[SerializeField] Image imgTypeStandard;
         private Sprite imgStandard;
         [SerializeField] Ease ease;
         private RectTransform rectTransform;
@@ -36,10 +36,10 @@ namespace Scripts{
                 setText(timerValue, IsTouchPosBuilding);
                 setCircleLoad(timeNormalize);
                 setImageType(buildingType);
-                if (timeNormalize > 1)
-                {
-                    this.gameObject.SetActive(false);
-                }
+                //if (timeNormalize > 1)
+                //{
+                //    this.gameObject.SetActive(false);
+                //}
             }
 
         }
@@ -71,10 +71,13 @@ namespace Scripts{
             }
             else
             {
-                rectTransform.DOScale(new Vector3(2,2,2),3f).SetEase(ease).OnComplete(() => { 
-                this.gameObject.SetActive(isActiveUI); });
-            }
-            
+                imgType.GetComponent<RectTransform>().DOScale(Vector3.one * 2f, 1f).SetEase(ease);
+                imgLoad.GetComponent<RectTransform>().DOScale(Vector3.zero,1f).SetEase(ease)
+                    .OnComplete(() => {
+                    imgType.GetComponent<RectTransform>().localScale = Vector3.one;
+                    imgLoad.GetComponent<RectTransform>().localScale = Vector3.one;
+                        this.gameObject.SetActive(isActiveUI); });
+            }            
         }
         
     }

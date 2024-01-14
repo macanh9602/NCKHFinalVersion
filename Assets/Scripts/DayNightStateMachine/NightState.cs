@@ -29,10 +29,20 @@ namespace Scripts.DayNightStateMachine{
                 dayNightController.TranstitionToState(new DayState(player));
                 //reset
             }
+            if(Input.GetKeyDown(KeyCode.A))
+            {
+                dayNightController.TranstitionToState(new DayState(player));
+            }
         }
         public void Exit(DayNightController dayNightController)
         {
             Manager.SoundManager.Instance.PlaySound(Manager.SoundManager.Instance.ClipSO.Victory);
+            ResetAfterNight();
+        }
+
+        private void ResetAfterNight()
+        {
+            enemiesDieAmount = 0;
         }
     }
     

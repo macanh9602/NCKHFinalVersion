@@ -39,11 +39,12 @@ namespace Scripts
         {
             if (currentHealth <= 0)
             {
-                if(this.gameObject.GetComponent<Enemy>().GetType() == typeof(Enemy))
-                {
-                    Manager.EnemyManager.Instance.addEnemiesDie(1);
-                    Debug.Log("hahah");
-                }
+                //if(this.gameObject.GetComponent<Enemy>().GetType() == typeof(Enemy))
+                //{
+                //    Manager.EnemyManager.Instance.addEnemiesDie(1);
+                //    //Debug.Log("+1");
+                //} //tai vi health systerm danh cho nhieu doi tuong nen dk nay bao null trong cac object ko phair enemy
+                //if(this.gameObject.name)
                 return true;
             }
             else return false;
