@@ -1,6 +1,8 @@
 ﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Scripts{
@@ -22,6 +24,7 @@ namespace Scripts{
         private Transform target;
         private Rigidbody2D rb;
         private Vector3 startPos;
+        public Action OnChangeEnemiesDieAmount;
         private void Start()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -67,6 +70,7 @@ namespace Scripts{
             {
                 HealthSysterm health = collision.gameObject.GetComponent<HealthSysterm>();
                 health.OnDamage(200f);
+                OnChangeEnemiesDieAmount?.Invoke();
                 Destroy(gameObject);
             }
         }

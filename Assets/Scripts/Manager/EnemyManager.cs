@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,10 +14,13 @@ namespace Scripts.Manager{
 
         public static EnemyManager Instance { get; private set; }
 
+        
+
         // Start is called before the first frame update
         private void Start()
         {
             Instance = this;
+
         }
 
         // Update is called once per frame
@@ -26,13 +30,20 @@ namespace Scripts.Manager{
             if (Input.GetMouseButtonDown(0))
             {
                 //Enemy.Create(Extension.MousePosition(), enemyType);
-                Enemy.OnCreate(enemyType , pos[Random.Range(0, pos.Count)].position  + Extension.Extension.getRandomPos(1));
+                Enemy.OnCreate(enemyType , pos[UnityEngine.Random.Range(0, pos.Count)].position  + Extension.Extension.getRandomPos(1));
             }
+            CheckEnemyAmount();
         }
 
         public void addEnemiesDie(int i)
         {
             enemiesDieAmount += i;
+        }
+        private void CheckEnemyAmount()
+        {
+            //GameObject[] object1 = GameObject.FindGameObjectsWithTag("Enemy");
+            //Debug.Log(object1.Length);
+            //so luong enemies bi destroy
         }
     }
     
