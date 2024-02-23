@@ -17,6 +17,7 @@ namespace Scripts
         public string details;
         public Damaging CanDamaging;
         public Receivable CanReceivable;
+        public Hall isTownHall;
     }
 
     [System.Serializable]
@@ -32,6 +33,13 @@ namespace Scripts
     {
         public float moneyReceivable;
     }
+
+    [System.Serializable]
+    public class Hall
+    {
+        public int addSlot;
+    }
+
 
 
 

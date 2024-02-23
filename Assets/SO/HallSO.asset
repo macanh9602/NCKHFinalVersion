@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af9bcf5bd76e9e147abf183df3905625, type: 3}
+  m_Name: HallSO
+  m_EditorClassIdentifier: 
+  nameBuilding: Hall
+  prefabs: {fileID: 6152208164278835355, guid: 4e61de6277c29764580c69c43535cf24, type: 3}
+  timeBuild: 0
+  money: 7
+  sprite: {fileID: 369043585, guid: 0a3dd457b69c62f4fae7a6c77ebbc2a2, type: 3}
+  icon: {fileID: 0}
+  details: 
+  CanDamaging:
+    damage: 0
+    amor: 0
+    typeOfWeapon: 
+  CanReceivable:
+    moneyReceivable: 0
+  isTownHall:
+    addSlot: 3

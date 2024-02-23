@@ -7,6 +7,7 @@ namespace Scripts.Manager{
     
     public class GameManager : MonoBehaviour
     {
+
         public static GameManager instance {  get; private set; }
         //can biet so quai da diet (lay tu EnemyManager)
         //so quai turn do ( mac dinh = 10)

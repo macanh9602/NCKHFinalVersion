@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Scripts.DayNightStateMachine
@@ -19,26 +20,23 @@ namespace Scripts.DayNightStateMachine
         //}
         public void TranstitionToState(IDayNight nextState)
         {
+            //StartCoroutine(TransitionTo(nextState));
+                currentState?.Exit(this);
+                currentState = nextState;
+                currentState?.Enter(this);
+                //StartCoroutine(EnterTime());
+                OnDayNightStateChange?.Invoke(currentState);
+        }
+
+        IEnumerator TransitionTo(IDayNight nextState)
+        {
             currentState?.Exit(this);
+            yield return new WaitForSeconds(2f);
             currentState = nextState;
             currentState?.Enter(this);
             //StartCoroutine(EnterTime());
             OnDayNightStateChange?.Invoke(currentState);
         }
-
-        //IEnumerator EnterTime()
-        //{
-        //    if (currentState.GetType() == typeof(NightState))
-        //    {
-        //        currentState?.Enter(this);
-        //        yield return null;
-        //    }
-        //    else if (currentState.GetType() == typeof(DayState))
-        //    {
-        //        yield return new WaitForSeconds(3f);
-        //        currentState?.Enter(this);
-        //    }
-        //}
         IEnumerator EnterTime()
         {
             yield return new WaitForSeconds(3f);

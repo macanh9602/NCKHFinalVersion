@@ -45,6 +45,16 @@ namespace Scripts
                 //    //Debug.Log("+1");
                 //} //tai vi health systerm danh cho nhieu doi tuong nen dk nay bao null trong cac object ko phair enemy
                 //if(this.gameObject.name)
+                Debug.Log(gameObject.name);
+                if(gameObject.name == "Enemy(Clone)")
+                {
+                    Manager.EnemyManager.Instance.addEnemiesDie(1);
+                }
+                else if(gameObject.name == "House(Clone)")
+                {
+                    Manager.BuildingManager.Instance.UpdateCurrentHouseAmount(-1);
+                }
+                //if(this.gameObject.name == "")
                 return true;
             }
             else return false;

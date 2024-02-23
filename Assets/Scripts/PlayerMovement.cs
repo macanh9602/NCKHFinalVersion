@@ -14,6 +14,9 @@ namespace Scripts{
         public Controller.PosBuildingController currentPosBuilding;
         public Action<Controller.PosBuildingController> OnChangeCurrentPosBuilding;
         public float costBuilding;
+        public bool soundNightOn = false;
+
+        private float t;
         private void Awake()
         {
             dayNightController = GetComponent<DayNightController>();
@@ -31,11 +34,26 @@ namespace Scripts{
         {
             Move();
             dayNightController.Excuted();
-            //Debug.Log((dayNightController.currentState));
-            //if (health != null && Input.GetKeyDown(KeyCode.Q))
+            #region <----soundBG---->
+            //if (dayNightController.CurrentState.GetType() == typeof(NightState) )
             //{
-            //    health.OnDamage(30f);
+            //    if(t <= 2f)
+            //    {
+            //        t += Time.deltaTime;
+            //    }
+            //    if (!soundNightOn && t >2f)
+            //    {
+            //        Manager.SoundManager.Instance.PlaySound(Manager.SoundManager.Instance.ClipSO.SoundNight);
+            //        soundNightOn = true;
+            //    }
+
             //}
+            //if(dayNightController.CurrentState.GetType() == typeof(DayState))
+            //{
+            //    t = 0f;
+            //    soundNightOn = false;
+            //}
+            #endregion
         }
 
         private void Move()

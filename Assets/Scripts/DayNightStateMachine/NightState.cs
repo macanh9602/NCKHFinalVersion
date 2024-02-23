@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Scripts.DayNightStateMachine{
-    
+namespace Scripts.DayNightStateMachine
+{
+
     public class NightState : IDayNight
     {
         private PlayerMovement player;
@@ -16,7 +17,7 @@ namespace Scripts.DayNightStateMachine{
         }
         public void Enter(DayNightController dayNightController)
         {
-            Manager.SoundManager.Instance.PlaySound(Manager.SoundManager.Instance.ClipSO.NightCallComplete);
+            Manager.SoundManager.Instance.PlaySoundOnShot(Manager.SoundManager.Instance.ClipSO.NightCallComplete);
         }
 
         public void Excuted(DayNightController dayNightController)
@@ -29,21 +30,23 @@ namespace Scripts.DayNightStateMachine{
                 dayNightController.TranstitionToState(new DayState(player));
                 //reset
             }
-            if(Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.A))
             {
                 dayNightController.TranstitionToState(new DayState(player));
             }
         }
         public void Exit(DayNightController dayNightController)
         {
-            Manager.SoundManager.Instance.PlaySound(Manager.SoundManager.Instance.ClipSO.Victory);
+            Manager.SoundManager.Instance.StopSound();
+            Manager.SoundManager.Instance.PlaySoundOnShot(Manager.SoundManager.Instance.ClipSO.Victory);
             ResetAfterNight();
         }
 
         private void ResetAfterNight()
         {
             enemiesDieAmount = 0;
+            player.soundNightOn = false;
         }
     }
-    
+
 }

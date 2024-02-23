@@ -19,7 +19,7 @@ namespace Scripts.Manager{
             //Debug.Log("halo");
             Transform building = Instantiate(buildingType.prefabs, pos, Quaternion.identity);
             //building.GetComponent<HouseController>
-            Manager.SoundManager.Instance.PlaySound(Manager.SoundManager.Instance.ClipSO.SuccessBuild);
+            Manager.SoundManager.Instance.PlaySoundOnShot(Manager.SoundManager.Instance.ClipSO.SuccessBuild);
             //Debug.Log(buildingType.GetType() + " / " + buildingType.GetType().Name);
             Debug.Log(buildingType.name);
             if(buildingType.name == "HouseSO")

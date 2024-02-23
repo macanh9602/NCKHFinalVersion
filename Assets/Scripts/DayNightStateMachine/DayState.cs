@@ -32,6 +32,7 @@ namespace Scripts.DayNightStateMachine
             OnChangeCurrentPosBuilding(player.currentPosBuilding);
             timeChangeState = 2.5f;
             player.OnChangeCurrentPosBuilding += OnChangeCurrentPosBuilding;
+            //Manager.ResourceManager.Instance.AddResourceAmount(Manager.BuildingManager.Instance.getCurrentHouseAmount());
         }
         public void Excuted(DayNightController dayNightController)
         {
@@ -39,7 +40,7 @@ namespace Scripts.DayNightStateMachine
             //sound call
             if (Input.GetKeyDown(KeyCode.Space) && !IsTouchPosBuilding)
             {
-                Manager.SoundManager.Instance.PlaySound(Manager.SoundManager.Instance.ClipSO.NightCallStart);
+                Manager.SoundManager.Instance.PlaySoundOnShot(Manager.SoundManager.Instance.ClipSO.NightCallStart);
                 
             }
             //press space
@@ -55,11 +56,11 @@ namespace Scripts.DayNightStateMachine
                         coinCurrentPay++;
                         if (coinCurrentPay == 1)
                         {
-                            Manager.SoundManager.Instance.PlaySound(Manager.SoundManager.Instance.ClipSO.StartPay);
+                            Manager.SoundManager.Instance.PlaySoundOnShot(Manager.SoundManager.Instance.ClipSO.StartPay);
                         }
                         else
                         {
-                            Manager.SoundManager.Instance.PlaySound(Manager.SoundManager.Instance.ClipSO.ExcutedPay);
+                            Manager.SoundManager.Instance.PlaySoundOnShot(Manager.SoundManager.Instance.ClipSO.ExcutedPay);
                         }
                         player.costBuilding--;
                         //Debug.Log(timer + " / " + coinToBuild);

@@ -13,6 +13,7 @@ namespace Scripts.Controller{
         {
             if(gameObject.GetComponent<HealthSysterm>().IsDie() == true)
             {
+                Debug.Log("1");
                 Manager.BuildingManager.Instance.UpdateCurrentHouseAmount(-1);
             }
         }

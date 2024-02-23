@@ -32,15 +32,17 @@ namespace Scripts.Controller{
         //private IObjectPool<Arrow> objectPool;
         //private ObjectPool<Arrow> arrowPool;
 
-        private ObjectPool<Arrow> objectPool;
+        private Pool.ObjectPool<Arrow> objectPool;
         public Action OnCreateArrow;
+
+        [SerializeField] AudioSource audioSource;
 
         private void Awake()
         {
             //objectPool = new ObjectPool<Arrow>(CreateProjectile,
             //    OnGetFromPool, OnReleaseToPool, OnDestroyPooledObject,
             //    true, 20, 100);
-            objectPool = new ObjectPool<Arrow>(pfArrow, OnPullObject, OnPushObject, 10);
+            objectPool = new Pool.ObjectPool<Arrow>(pfArrow, OnPullObject, OnPushObject, 10);
         }
         private void OnPullObject(Arrow obj)
         {
@@ -120,7 +122,7 @@ namespace Scripts.Controller{
                     //Debug.Log("halo2");
                     timeSpawnDistance = timeSpawnDistanceMax;
                     Arrow arrow = objectPool.Pull();
-                    Manager.SoundManager.Instance.PlaySound(Manager.SoundManager.Instance.ClipSO.ShootSounds.GetRandomClip());
+                    audioSource.PlayOneShot(Manager.SoundManager.Instance.ClipSO.ShootSounds.GetRandomClip());
                     //Debug.Log(arrow);
                     //if (arrow == null)
                        // return;

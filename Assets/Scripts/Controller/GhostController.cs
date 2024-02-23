@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Scripts.Controller{
-    
+namespace Scripts.Controller
+{
+
     public class GhostController : MonoBehaviour
     {
         [SerializeField] private PlayerMovement player;
@@ -17,11 +18,13 @@ namespace Scripts.Controller{
 
         public void OnChangeCurrentPosBuilding(PosBuildingController currentPosBuilding)
         {
-            if(currentPosBuilding != null && 
+            if (currentPosBuilding != null &&
                 player.GetComponent<DayNightController>().CurrentState.GetType() == typeof(DayState))
             {
-                if(currentPosBuilding.IsBuild == false)
-                Show(currentPosBuilding);
+                if (currentPosBuilding.IsBuild == false)
+                {
+                    Show(currentPosBuilding);
+                }
                 else Hide();
             }
             else Hide();
@@ -40,5 +43,5 @@ namespace Scripts.Controller{
             this.transform.position = current.transform.position;
         }
     }
-    
+
 }

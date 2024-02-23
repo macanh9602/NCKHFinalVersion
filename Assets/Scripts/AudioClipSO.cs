@@ -30,6 +30,9 @@ namespace Scripts{
         [SerializeField] ClipArray addCoins;
         [SerializeField] AudioClip defeat;
 
+        [Header("NightSound")]
+        [SerializeField] AudioClip soundNight;
+
         [Serializable]
         public class ClipArray
         {
@@ -58,6 +61,8 @@ namespace Scripts{
         public ClipArray AddCoins => addCoins;
 
         public AudioClip Defeat => defeat;
+
+        public AudioClip SoundNight => soundNight;
 
 
     }

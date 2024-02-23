@@ -11,7 +11,7 @@ using UnityEngine.Pool;
 namespace Scripts.Controller
 {
 
-    public class Arrow : MonoBehaviour , IPoolable<Arrow>
+    public class Arrow : MonoBehaviour , Pool.IPoolable<Arrow>
     {
         private Enemy target;
         private Vector3 pos;
@@ -21,7 +21,7 @@ namespace Scripts.Controller
         private float _lifetime = 2f;
 
 
-        private ObjectPool<Arrow> objectPool;
+        private Pool.ObjectPool<Arrow> objectPool;
 
         //curve
         //do cong 2 chieeu time va do cao
@@ -36,7 +36,7 @@ namespace Scripts.Controller
 
 
         // public property to give the projectile a reference to its ObjectPool
-        public ObjectPool<Arrow> ObjectPool { set => objectPool = value; }
+        public Pool.ObjectPool<Arrow> ObjectPool { set => objectPool = value; }
         public void Initialize(Action<Arrow> returnAction)
         {
 
@@ -45,7 +45,7 @@ namespace Scripts.Controller
         {
 
         }
-        public void Init(Enemy target ,Vector3 pos, ObjectPool<Arrow> _pool , ArcherController current)
+        public void Init(Enemy target ,Vector3 pos, Pool.ObjectPool<Arrow> _pool , ArcherController current)
         {
             this.target = target;
             this.pos = pos;

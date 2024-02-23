@@ -12,6 +12,13 @@ namespace Scripts.Controller{
         public BuildingTypeSO buildingType;
         public bool IsBuild = false;
 
+        public void Start()
+        {
+            if(buildingType.nameBuilding == "Hall")
+            {
+                IsBuild = true;
+            }
+        }
         public void setIsBuild()
         {
             IsBuild = true;

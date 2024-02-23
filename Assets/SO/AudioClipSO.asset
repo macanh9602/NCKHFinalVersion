@@ -27,3 +27,4 @@ MonoBehaviour:
   addCoins:
     clips: []
   defeat: {fileID: 0}
+  soundNight: {fileID: 8300000, guid: b782d93e8550226418655806160aaf8e, type: 3}
