@@ -1,13 +1,9 @@
-﻿using Scripts.Manager;
+﻿
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
-namespace Scripts
-{
-
     public class HealthSysterm : MonoBehaviour
     {
         [SerializeField] float healthMax;
@@ -39,20 +35,14 @@ namespace Scripts
         {
             if (currentHealth <= 0)
             {
-                //if(this.gameObject.GetComponent<Enemy>().GetType() == typeof(Enemy))
-                //{
-                //    Manager.EnemyManager.Instance.addEnemiesDie(1);
-                //    //Debug.Log("+1");
-                //} //tai vi health systerm danh cho nhieu doi tuong nen dk nay bao null trong cac object ko phair enemy
-                //if(this.gameObject.name)
                 Debug.Log(gameObject.name);
-                if(gameObject.name == "Enemy(Clone)")
+                if(gameObject.name == "Enemy_B(Clone)")
                 {
-                    Manager.EnemyManager.Instance.addEnemiesDie(1);
+                    EnemyManager.Instance.addEnemiesDie(1);
                 }
                 else if(gameObject.name == "House(Clone)")
                 {
-                    Manager.BuildingManager.Instance.UpdateCurrentHouseAmount(-1);
+                    BuildingManager.Instance.UpdateCurrentHouseAmount(-1);
                 }
                 //if(this.gameObject.name == "")
                 return true;
@@ -61,5 +51,5 @@ namespace Scripts
         }
 
     }
-}
+
 

@@ -1,13 +1,11 @@
-﻿using Scripts.DayNightStateMachine;
+﻿
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Scripts.Manager{
-    
     public class GameManager : MonoBehaviour
-    {
-
+    { 
         public static GameManager instance {  get; private set; }
         //can biet so quai da diet (lay tu EnemyManager)
         //so quai turn do ( mac dinh = 10)
@@ -32,7 +30,7 @@ namespace Scripts.Manager{
 
         //public void LogicTransitionToDay()
         //{
-        //    enemiesDieAmount = Manager.EnemyManager.Instance.EnemiesDieAmount;
+          //  enemiesDieAmount = Manager.EnemyManager.Instance.EnemiesDieAmount;
         //    //Debug.Log(enemiesDieAmount);
         //    if (enemiesDieAmount >= enemiesMaxAmount)
         //    {
@@ -43,5 +41,4 @@ namespace Scripts.Manager{
         //}
 
     }
-    
-}
+

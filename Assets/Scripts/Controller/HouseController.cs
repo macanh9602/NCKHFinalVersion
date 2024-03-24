@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Scripts.Controller{
     
     public class HouseController : MonoBehaviour
     {
@@ -14,10 +13,8 @@ namespace Scripts.Controller{
             if(gameObject.GetComponent<HealthSysterm>().IsDie() == true)
             {
                 Debug.Log("1");
-                Manager.BuildingManager.Instance.UpdateCurrentHouseAmount(-1);
+                BuildingManager.Instance.UpdateCurrentHouseAmount(-1);
             }
         }
 
     }
-    
-}

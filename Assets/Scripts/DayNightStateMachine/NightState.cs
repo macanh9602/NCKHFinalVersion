@@ -1,10 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-namespace Scripts.DayNightStateMachine
-{
-
     public class NightState : IDayNight
     {
         private PlayerMovement player;
@@ -17,12 +13,12 @@ namespace Scripts.DayNightStateMachine
         }
         public void Enter(DayNightController dayNightController)
         {
-            Manager.SoundManager.Instance.PlaySoundOnShot(Manager.SoundManager.Instance.ClipSO.NightCallComplete);
+            SoundManager.Instance.PlaySoundOnShot(SoundManager.Instance.ClipSO.NightCallComplete);
         }
 
         public void Excuted(DayNightController dayNightController)
         {
-            enemiesDieAmount = Manager.EnemyManager.Instance.EnemiesDieAmount;
+            enemiesDieAmount = EnemyManager.Instance.EnemiesDieAmount;
             //Debug.Log(enemiesDieAmount);
             if (enemiesDieAmount >= enemiesMaxAmount)
             {
@@ -37,8 +33,8 @@ namespace Scripts.DayNightStateMachine
         }
         public void Exit(DayNightController dayNightController)
         {
-            Manager.SoundManager.Instance.StopSound();
-            Manager.SoundManager.Instance.PlaySoundOnShot(Manager.SoundManager.Instance.ClipSO.Victory);
+            SoundManager.Instance.StopSound();
+            SoundManager.Instance.PlaySoundOnShot(SoundManager.Instance.ClipSO.Victory);
             ResetAfterNight();
         }
 
@@ -49,4 +45,3 @@ namespace Scripts.DayNightStateMachine
         }
     }
 
-}

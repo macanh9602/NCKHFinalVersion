@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Scripts.DayNightStateMachine {
     
     public interface IDayNight
     {
@@ -11,5 +10,4 @@ namespace Scripts.DayNightStateMachine {
         public void Exit(DayNightController dayNightController);
 
     }
-    
-}
+

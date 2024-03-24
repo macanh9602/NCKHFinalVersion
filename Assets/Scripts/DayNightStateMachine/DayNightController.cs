@@ -4,12 +4,16 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Scripts.DayNightStateMachine
-{
-
+    public enum State
+    {
+        Day,
+        Night
+    }
     public class DayNightController : MonoBehaviour
     {
         private IDayNight currentState;
+        public State state;
+        
         public IDayNight CurrentState => currentState;
         public event Action<IDayNight> OnDayNightStateChange;
 
@@ -18,6 +22,8 @@ namespace Scripts.DayNightStateMachine
         //    this.currentState = currentState;
         //    currentState?.Enter(this);
         //}
+
+
         public void TranstitionToState(IDayNight nextState)
         {
             //StartCoroutine(TransitionTo(nextState));
@@ -47,10 +53,6 @@ namespace Scripts.DayNightStateMachine
             currentState?.Excuted(this);
         }
 
-        public IDayNight getCurrentState()
-        {
-            return currentState;
-        }
     }
 
-}
+

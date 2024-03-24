@@ -6,7 +6,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Scripts{
 
     public class LoadTimeUI : MonoBehaviour
     {
@@ -81,5 +80,3 @@ namespace Scripts{
         }
         
     }
-    
-}

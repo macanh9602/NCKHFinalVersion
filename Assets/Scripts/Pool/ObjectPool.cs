@@ -2,7 +2,6 @@
 using UnityEngine;
 using System;
 
-namespace Scripts.Pool{
     public class ObjectPool<T> : IPool<T> where T : MonoBehaviour, IPoolable<T>
     {
         //pool setup
@@ -13,11 +12,12 @@ namespace Scripts.Pool{
         }
     
         //pool setup nang cao   
-        public ObjectPool(GameObject pooledObject, Action<T> pullObject, Action<T> pushObject, int numToSpawn = 0)
+        public ObjectPool(Transform parent ,GameObject pooledObject, Action<T> pullObject, Action<T> pushObject, int numToSpawn = 0)
         {
             this.prefab = pooledObject;
             this.pullObject = pullObject;
             this.pushObject = pushObject;
+            this.parent = parent;
             Spawn(numToSpawn);
         }
     
@@ -25,6 +25,8 @@ namespace Scripts.Pool{
         private Action<T> pushObject;
         private Stack<T> pooledObjects = new Stack<T>();
         private GameObject prefab;
+        private Transform parent;
+
         public int pooledCount
         {
             get
@@ -103,10 +105,10 @@ namespace Scripts.Pool{
             for (int i = 0; i < number; i++)
             {
                 t = GameObject.Instantiate(prefab).GetComponent<T>();
+                t.transform.SetParent(parent);  
                 pooledObjects.Push(t);
                 t.gameObject.SetActive(false);
             }
         }
     }
-    
-}
+

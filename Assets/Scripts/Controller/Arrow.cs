@@ -8,12 +8,10 @@ using System;
 using UnityEngine.Pool;
 //using static UnityEngine.Rendering.ObjectPool<T>;
 
-namespace Scripts.Controller
-{
 
-    public class Arrow : MonoBehaviour , Pool.IPoolable<Arrow>
+    public class Arrow : MonoBehaviour, IPoolable<Arrow>
     {
-        private Enemy target;
+        private EnemyBase target;
         private Vector3 pos;
         private Vector3 lastEnemyPosition;
         private Vector3 direction;
@@ -21,7 +19,7 @@ namespace Scripts.Controller
         private float _lifetime = 2f;
 
 
-        private Pool.ObjectPool<Arrow> objectPool;
+        private ObjectPool<Arrow> objectPool;
 
         //curve
         //do cong 2 chieeu time va do cao
@@ -36,7 +34,7 @@ namespace Scripts.Controller
 
 
         // public property to give the projectile a reference to its ObjectPool
-        public Pool.ObjectPool<Arrow> ObjectPool { set => objectPool = value; }
+        public ObjectPool<Arrow> ObjectPool { set => objectPool = value; }
         public void Initialize(Action<Arrow> returnAction)
         {
 
@@ -45,22 +43,32 @@ namespace Scripts.Controller
         {
 
         }
-        public void Init(Enemy target ,Vector3 pos, Pool.ObjectPool<Arrow> _pool , ArcherController current)
+        public void Init(EnemyBase target, Vector3 pos, ObjectPool<Arrow> _pool, ArcherController current)
         {
+
+            //Debug.Log(target);
             this.target = target;
             this.pos = pos;
             objectPool = _pool;
             currentArcher = current;
             this.gameObject.SetActive(true);
+
+        }
+
+        private void Awake()
+        {
+
         }
         private void Start()
         {
+
             currentArcher.OnCreateArrow += OnCreateArrow;
 
         }
 
         public void OnCreateArrow()
         {
+            Debug.Log(target);
             if (target != null && objectPool != null)
             {
                 //transform.position += normalize * 3 * time.deltatime;
@@ -71,10 +79,10 @@ namespace Scripts.Controller
 
         private void Update()
         {
-                Move();
-                ChangeRotation();
-                //transform.getcomponent<curvemovement>().move(pos, lastenemyposition);
-                SetTimeToDestroy();
+            Move();
+            ChangeRotation();
+            //transform.getcomponent<curvemovement>().move(pos, lastenemyposition);
+            SetTimeToDestroy();
         }
         public IEnumerator Curve(Vector3 start, Vector3 end)
         {
@@ -84,8 +92,8 @@ namespace Scripts.Controller
             }
             while (t <= duration)
             {
-            t += Time.deltaTime;
-            //Debug.Log(t);
+                t += Time.deltaTime;
+                //Debug.Log(t);
                 //tinh toan do cao theo curve vaf duration
                 float heightCurrent = curve.Evaluate(t / duration) * heightY;
                 this.gameObject.transform.position = Vector3.Lerp(start, end, t / duration) + new Vector3(0, heightCurrent);  //+ do cao;
@@ -156,4 +164,3 @@ namespace Scripts.Controller
     }
 
 
-}

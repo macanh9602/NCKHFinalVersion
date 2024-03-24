@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-namespace Scripts.DayNightStateMachine{
-    
     public class DayNightStateView : MonoBehaviour
     {
         [SerializeField] private Gradient gradient;
@@ -26,7 +24,7 @@ namespace Scripts.DayNightStateMachine{
 
         private void DayNightStateView_OnDayNightStateChange(IDayNight currentState)
         {
-            if(currentState.GetType() == typeof(DayState))
+            if (currentState.GetType() == typeof(DayState))
             {
                 StartCoroutine(ExecuteDayView());
             }
@@ -38,7 +36,7 @@ namespace Scripts.DayNightStateMachine{
 
         private void TurnOnLight(bool isActive)
         {
-            foreach(Transform go in lstTorch)
+            foreach (Transform go in lstTorch)
             {
                 //Debug.Log("halo");
                 go.Find("sprite_fire").gameObject.SetActive(isActive);
@@ -80,6 +78,11 @@ namespace Scripts.DayNightStateMachine{
                 yield return null;
             }
         }
+
+        private void OnDestroy()
+        {
+           // player.GetComponent<DayNightController>().OnDayNightStateChange -= DayNightStateView_OnDayNightStateChange;
+        }
     }
-    
-}
+
+

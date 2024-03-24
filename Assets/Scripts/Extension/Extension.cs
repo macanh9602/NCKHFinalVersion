@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Scripts.Extension{
     
     public static class Extension
     {      
@@ -16,5 +15,4 @@ namespace Scripts.Extension{
             return new Vector3(Random.Range(-i, i) , Random.Range(-i,i));
         }
     }
-    
-}
+

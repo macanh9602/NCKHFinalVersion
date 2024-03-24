@@ -1,18 +1,18 @@
-﻿using Scripts.DayNightStateMachine;
+﻿
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VTLTools;
 
-namespace Scripts{
     
     public class PlayerMovement : MonoBehaviour
     {
         [SerializeField] float speed = 10f;
         private HealthSysterm health;
         DayNightController dayNightController;
-        public Controller.PosBuildingController currentPosBuilding;
-        public Action<Controller.PosBuildingController> OnChangeCurrentPosBuilding;
+        public PosBuildingController currentPosBuilding;
+        public Action<PosBuildingController> OnChangeCurrentPosBuilding;
         public float costBuilding;
         public bool soundNightOn = false;
 
@@ -65,24 +65,22 @@ namespace Scripts{
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if(collision.gameObject.layer == 7)
+            if (collision.gameObject.layer == LayerMask.NameToLayer(StringsSafeAccess.LAYER_SLOT_NAME))
             {
-                costBuilding = collision.GetComponent<Controller.PosBuildingController>().buildingType.money;
-                currentPosBuilding = collision.GetComponent<Controller.PosBuildingController>();
+                costBuilding = collision.GetComponent<PosBuildingController>().buildingType.money;
+                currentPosBuilding = collision.GetComponent<PosBuildingController>();
                 OnChangeCurrentPosBuilding?.Invoke(currentPosBuilding);
             }
-            
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            if (collision.gameObject.layer == 7)
+            if (collision.gameObject.layer == LayerMask.NameToLayer(StringsSafeAccess.LAYER_SLOT_NAME))
             {
                 currentPosBuilding = null;
                 OnChangeCurrentPosBuilding?.Invoke(currentPosBuilding);
-            }    
+            }
         }
 
     }
     
-}

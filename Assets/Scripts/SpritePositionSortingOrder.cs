@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Scripts {
     
     //sắp xếp GObj theo sortinglayer 
     public class SpritePositionSortingOrder : MonoBehaviour
@@ -29,4 +28,4 @@ namespace Scripts {
     
     }
     
-}
+

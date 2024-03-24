@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Scripts.Manager{
-    
     public class ResourceManager : MonoBehaviour
     {
         public static ResourceManager Instance {  get; private set; }
@@ -37,5 +35,3 @@ namespace Scripts.Manager{
             OnCoinChange?.Invoke(this, EventArgs.Empty);
         }
     }
-    
-}

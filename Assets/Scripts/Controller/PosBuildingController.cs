@@ -1,11 +1,10 @@
-﻿using Scripts;
+﻿
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Resources;
 using UnityEngine;
 
-namespace Scripts.Controller{
     
     public class PosBuildingController : MonoBehaviour
     {
@@ -24,6 +23,4 @@ namespace Scripts.Controller{
             IsBuild = true;
         }
     }
-    
-}
 

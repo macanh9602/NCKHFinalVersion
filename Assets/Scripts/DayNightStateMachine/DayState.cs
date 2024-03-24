@@ -1,12 +1,10 @@
-﻿using Scripts.Manager;
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
 
-namespace Scripts.DayNightStateMachine
-{
 
     public class DayState : IDayNight
     {
@@ -15,7 +13,7 @@ namespace Scripts.DayNightStateMachine
         private float timer; //1f 1 coin
         private float coinToBuild;
         private float timeChangeState;
-        private Controller.PosBuildingController currentPosBuilding;
+        private PosBuildingController currentPosBuilding;
         //public float Timer => timer;
 
         private bool IsTouchPosBuilding = false;
@@ -40,7 +38,7 @@ namespace Scripts.DayNightStateMachine
             //sound call
             if (Input.GetKeyDown(KeyCode.Space) && !IsTouchPosBuilding)
             {
-                Manager.SoundManager.Instance.PlaySoundOnShot(Manager.SoundManager.Instance.ClipSO.NightCallStart);
+                SoundManager.Instance.PlaySoundOnShot(SoundManager.Instance.ClipSO.NightCallStart);
                 
             }
             //press space
@@ -56,11 +54,11 @@ namespace Scripts.DayNightStateMachine
                         coinCurrentPay++;
                         if (coinCurrentPay == 1)
                         {
-                            Manager.SoundManager.Instance.PlaySoundOnShot(Manager.SoundManager.Instance.ClipSO.StartPay);
+                            SoundManager.Instance.PlaySoundOnShot(SoundManager.Instance.ClipSO.StartPay);
                         }
                         else
                         {
-                            Manager.SoundManager.Instance.PlaySoundOnShot(Manager.SoundManager.Instance.ClipSO.ExcutedPay);
+                            SoundManager.Instance.PlaySoundOnShot(SoundManager.Instance.ClipSO.ExcutedPay);
                         }
                         player.costBuilding--;
                         //Debug.Log(timer + " / " + coinToBuild);
@@ -72,7 +70,7 @@ namespace Scripts.DayNightStateMachine
                     if (coinCurrentPay >= coinToBuild )
                     {
                         BuildingConstruction building = BuildingConstruction.Create(currentPosBuilding.buildingType, currentPosBuilding.transform.position , currentPosBuilding);
-                        Manager.ResourceManager.Instance.CalculateCost(currentPosBuilding.buildingType.money);
+                        ResourceManager.Instance.CalculateCost(currentPosBuilding.buildingType.money);
                         currentPosBuilding.setIsBuild();
                         coinCurrentPay = 0;
                         timer = 0f;
@@ -101,7 +99,7 @@ namespace Scripts.DayNightStateMachine
                 IsActiveUILoad = false;
                 if(!IsNightCallComplete)
                 {
-                    Manager.SoundManager.Instance.StopSound();
+                    SoundManager.Instance.StopSound();
                 }
                 LoadTimeUI.instance.setUILoad(IsActiveUILoad, IsNightCallComplete);
                 //Debug.Log("hohoho");
@@ -115,7 +113,7 @@ namespace Scripts.DayNightStateMachine
             player.OnChangeCurrentPosBuilding -= OnChangeCurrentPosBuilding;
         }
 
-        public void OnChangeCurrentPosBuilding(Controller.PosBuildingController currentPosBuilding)
+        public void OnChangeCurrentPosBuilding(PosBuildingController currentPosBuilding)
         {
             timer = 0f;
             coinCurrentPay = 0;
@@ -139,4 +137,3 @@ namespace Scripts.DayNightStateMachine
 
     }
 
-}

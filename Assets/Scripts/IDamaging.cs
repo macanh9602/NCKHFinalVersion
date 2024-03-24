@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Scripts{
     
     public interface IDamaging
     {
@@ -13,5 +12,3 @@ namespace Scripts{
 
     }
 
-    
-}

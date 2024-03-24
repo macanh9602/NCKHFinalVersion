@@ -1,10 +1,7 @@
-﻿using Scripts.DayNightStateMachine;
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-namespace Scripts.Controller
-{
 
     public class GhostController : MonoBehaviour
     {
@@ -44,4 +41,5 @@ namespace Scripts.Controller
         }
     }
 
-}
+
+
